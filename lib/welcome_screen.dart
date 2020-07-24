@@ -17,7 +17,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 180, bottom: 10, left: 10, right: 10),
-            child: Row(),
+            child: Row(
+              children: <Widget>[],
+            ),
           ),
         ],
       ),
