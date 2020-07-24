@@ -15,7 +15,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Row(),
+          Padding(
+            padding: EdgeInsets.only(top: 180, bottom: 10, left: 10, right: 10),
+            child: Row(),
+          ),
         ],
       ),
     );
