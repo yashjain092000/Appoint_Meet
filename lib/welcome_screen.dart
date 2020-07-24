@@ -18,7 +18,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Padding(
             padding: EdgeInsets.only(top: 180, bottom: 10, left: 10, right: 10),
             child: Row(
-              children: <Widget>[],
+              children: <Widget>[
+                Image(
+                  image: AssetImage('images/logopng.png'),
+                  height: 100,
+                ),
+              ],
             ),
           ),
         ],
