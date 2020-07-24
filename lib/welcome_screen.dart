@@ -23,6 +23,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   image: AssetImage('images/logopng.png'),
                   height: 100,
                 ),
+                Text(
+                  "APPOINT",
+                ),
               ],
             ),
           ),
