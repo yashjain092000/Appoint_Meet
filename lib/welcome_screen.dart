@@ -25,7 +25,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 Text(
                   "APPOINT",
-                  style: TextStyle(),
+                  style: TextStyle(
+                    fontSize: 32.0,
+                  ),
                 ),
               ],
             ),
