@@ -11,6 +11,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     //scaffold
     return Scaffold(
       backgroundColor: Colors.white,
+      //main body
+      body: Column(),
     );
   }
 }
