@@ -12,7 +12,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       //main body
-      body: Column(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+      ),
     );
   }
 }
