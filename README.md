@@ -1,6 +1,6 @@
 # Appoint_Meet
 
-A new Flutter project.
+CCV project for managing appointments.
 
 ## Getting Started
 
