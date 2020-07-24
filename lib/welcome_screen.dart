@@ -30,6 +30,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
+                SizedBox(
+                  width: 20.0,
+                  height: 100.0,
+                ),
               ],
             ),
           ),
