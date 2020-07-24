@@ -14,6 +14,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       //main body
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[],
       ),
     );
   }
