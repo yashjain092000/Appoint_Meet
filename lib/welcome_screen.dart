@@ -11,6 +11,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Animation animation;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     //scaffold
     return Scaffold(
