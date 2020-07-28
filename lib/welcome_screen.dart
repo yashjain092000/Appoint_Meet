@@ -95,7 +95,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           ),
           Padding(
             padding: EdgeInsets.only(top: 18.0),
-            child: Row(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
           ),
         ],
       ),
