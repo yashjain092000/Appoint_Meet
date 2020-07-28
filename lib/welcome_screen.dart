@@ -5,7 +5,8 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     //scaffold
