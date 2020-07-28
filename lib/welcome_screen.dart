@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:nice_button/nice_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
