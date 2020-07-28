@@ -49,9 +49,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             padding: EdgeInsets.only(top: 180, bottom: 10, left: 10, right: 10),
             child: Row(
               children: <Widget>[
-                Image(
-                  image: AssetImage('images/logopng.png'),
-                  height: 100,
+                Transform.rotate(
+                  angle: animation.value * 6.3,
+                  child: Image(
+                    image: AssetImage('images/logopng.png'),
+                    height: 100,
+                  ),
                 ),
                 Text(
                   "APPOINT",
