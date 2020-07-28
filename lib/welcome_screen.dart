@@ -98,6 +98,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[],
+                ),
+              ],
             ),
           ),
         ],
