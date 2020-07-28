@@ -18,6 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       duration: Duration(seconds: 2),
       vsync: this,
     );
+    animation = CurvedAnimation();
   }
 
   @override
