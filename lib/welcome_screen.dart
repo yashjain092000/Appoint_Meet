@@ -18,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       duration: Duration(seconds: 2),
       vsync: this,
     );
-    animation = CurvedAnimation();
+    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
   }
 
   @override
