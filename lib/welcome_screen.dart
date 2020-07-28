@@ -16,6 +16,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     controller = AnimationController(
       duration: Duration(seconds: 2),
+      vsync: this,
     );
   }
 
