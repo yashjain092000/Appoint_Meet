@@ -171,7 +171,27 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           Padding(
             padding:
                 EdgeInsets.only(top: 50.0, left: 20, right: 20, bottom: 10),
-            child: Row(),
+            child: Row(
+              children: <Widget>[
+                NiceButton(
+                  radius: 40,
+                  elevation: 10,
+                  padding: const EdgeInsets.all(15),
+                  text: "Appointer",
+                  icon: Icons.create,
+                  gradientColors: [Colors.deepPurple, Colors.white],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AuthScreenAppointer(),
+                      ),
+                    );
+                  },
+                  background: Colors.white,
+                )
+              ],
+            ),
           ),
         ],
       ),
