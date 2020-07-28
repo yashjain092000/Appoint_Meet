@@ -20,7 +20,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
     animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.forward();
-    animation.addStatusListener((status) {});
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.dispose();
+      }
+    });
   }
 
   @override
