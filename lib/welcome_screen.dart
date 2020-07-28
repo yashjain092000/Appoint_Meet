@@ -181,12 +181,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   icon: Icons.create,
                   gradientColors: [Colors.deepPurple, Colors.white],
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AuthScreenAppointer(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => AuthScreenAppointer(),
+                    //   ),
+                    // );
                   },
                   background: Colors.white,
                 )
