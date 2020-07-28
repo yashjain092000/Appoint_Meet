@@ -93,7 +93,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ],
             ),
           ),
-          Row(),
+          Padding(
+            padding: EdgeInsets.only(top: 18.0),
+            child: Row(),
+          ),
         ],
       ),
     );
