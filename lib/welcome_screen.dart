@@ -85,10 +85,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     "ALL",
                   ],
                   // alignment: Alignment(1.0, 0.5),
-                  // textStyle: TextStyle(
-                  //   fontSize: 32.0,
-                  //   fontWeight: FontWeight.w900,
-                  // ),
+                  textStyle: TextStyle(
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ],
             ),
