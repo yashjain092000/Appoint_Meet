@@ -8,6 +8,8 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
+  Animation animation;
+
   @override
   Widget build(BuildContext context) {
     //scaffold
