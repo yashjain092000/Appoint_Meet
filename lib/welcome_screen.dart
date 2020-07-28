@@ -102,8 +102,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Column(
                   children: <Widget>[
                     Row(children: <Widget>[
-                      
-                    ],
+                      Text(
+                        "One place where you can ",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ]),
                   ],
                 ),
               ],
