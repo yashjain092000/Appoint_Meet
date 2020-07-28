@@ -151,6 +151,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 EdgeInsets.only(top: 140.0, left: 20, right: 20, bottom: 10),
             child: Row(),
           ),
+          Padding(
+            padding:
+                EdgeInsets.only(top: 50.0, left: 20, right: 20, bottom: 10),
+            child: Row(),
+          ),
         ],
       ),
     );
