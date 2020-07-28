@@ -100,7 +100,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Column(
-                  children: <Widget>[],
+                  children: <Widget>[
+                    Row(children: <Widget>[
+                      
+                    ],
+                  ],
                 ),
               ],
             ),
