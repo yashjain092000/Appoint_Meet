@@ -33,6 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void dispose() {
     super.dispose();
+    controller.dispose();
   }
 
   @override
