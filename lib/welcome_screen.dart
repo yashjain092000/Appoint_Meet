@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -69,6 +70,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 SizedBox(
                   width: 20.0,
                   height: 100.0,
+                ),
+                RotateAnimatedTextKit(
+                  onTap: () {
+                    print("Tap Event");
+                  },
+                  isRepeatingAnimation: true,
+
+                  //totalRepeatCount: 3,
+                  text: [
+                    "MEET",
+                    "ME",
+                    "YOU",
+                    "ALL",
+                  ],
+                  // alignment: Alignment(1.0, 0.5),
+                  // textStyle: TextStyle(
+                  //   fontSize: 32.0,
+                  //   fontWeight: FontWeight.w900,
+                  // ),
                 ),
               ],
             ),
