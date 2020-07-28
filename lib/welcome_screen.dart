@@ -25,6 +25,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         controller.dispose();
       }
     });
+    controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
