@@ -131,6 +131,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       )
                     ]),
+                    Row(children: <Widget>[
+                      Text(
+                        "Get your appointments booked",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      )
+                    ]),
                   ],
                 ),
               ],
