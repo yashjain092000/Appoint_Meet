@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:nice_button/nice_button.dart';
+import 'auth_screen_appointee.dart';
+import 'auth_screen_appointer.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -159,10 +161,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 text: "Appointee",
                 gradientColors: [Colors.deepPurple, Colors.white],
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => AuthScreen()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AuthScreenAppointee()),
+                  );
                 },
                 background: Colors.white,
               ),
@@ -181,12 +184,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   icon: Icons.create,
                   gradientColors: [Colors.deepPurple, Colors.white],
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => AuthScreenAppointer(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AuthScreenAppointer(),
+                      ),
+                    );
                   },
                   background: Colors.white,
                 )
