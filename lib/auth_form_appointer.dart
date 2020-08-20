@@ -45,6 +45,30 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
   int _eveTime1 = 0;
   int _eveTime2 = 0;
 
+  void _trySubmit() {
+    final isValid = _formKey.currentState.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState.save();
+      widget.submitFn(
+          _userEmail.trim(),
+          _userPassword.trim(),
+          _userName.trim(),
+          _phn.trim(),
+          _address.trim(),
+          _specialisation.trim(),
+          _fee.trim(),
+          _emFee.trim(),
+          _morTime1,
+          _morTime2,
+          _eveTime1,
+          _eveTime2,
+          _isLogin,
+          context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container();
