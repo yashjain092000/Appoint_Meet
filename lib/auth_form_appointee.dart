@@ -5,6 +5,18 @@ class AuthFormAppointee extends StatefulWidget {
     this.submitFn,
     this.isLoading,
   );
+  final bool isLoading;
+
+  final void Function(
+    String email,
+    String password,
+    String userName,
+    String phn,
+    String age,
+    String city,
+    bool isLogin,
+    BuildContext ctx,
+  ) submitFn;
 
   @override
   _AuthFormAppointeeState createState() => _AuthFormAppointeeState();
