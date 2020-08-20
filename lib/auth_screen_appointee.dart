@@ -68,6 +68,12 @@ class _AuthScreenAppointeeState extends State<AuthScreenAppointee> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      // body: AuthFormAppointee(
+      //   _submitAuthForm,
+      //   _isLoading,
+      // ),
+    );
   }
 }
