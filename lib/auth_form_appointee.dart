@@ -23,6 +23,16 @@ class AuthFormAppointee extends StatefulWidget {
 }
 
 class _AuthFormAppointeeState extends State<AuthFormAppointee> {
+  final _formKey = GlobalKey<FormState>();
+
+  var _isLogin = true;
+  var _userEmail = '';
+  var _userName = '';
+  var _userPassword = '';
+  var _phn = '';
+  var _age = '';
+  var _city = '';
+
   @override
   Widget build(BuildContext context) {
     return Container();
