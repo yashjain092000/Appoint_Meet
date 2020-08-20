@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'auth_form_appointee.dart';
 
 class AuthScreenAppointee extends StatefulWidget {
   @override
@@ -70,10 +71,10 @@ class _AuthScreenAppointeeState extends State<AuthScreenAppointee> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      // body: AuthFormAppointee(
-      //   _submitAuthForm,
-      //   _isLoading,
-      // ),
+      body: AuthFormAppointee(
+        _submitAuthForm,
+        _isLoading,
+      ),
     );
   }
 }
