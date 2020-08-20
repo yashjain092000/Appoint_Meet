@@ -29,6 +29,22 @@ class AuthFormAppointer extends StatefulWidget {
 }
 
 class _AuthFormAppointerState extends State<AuthFormAppointer> {
+  final _formKey = GlobalKey<FormState>();
+
+  var _isLogin = true;
+  var _userEmail = '';
+  var _userName = '';
+  var _userPassword = '';
+  var _phn = '';
+  String _address = '';
+  String _specialisation = '';
+  String _fee = '';
+  String _emFee = '';
+  int _morTime1 = 0;
+  int _morTime2 = 0;
+  int _eveTime1 = 0;
+  int _eveTime2 = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container();
