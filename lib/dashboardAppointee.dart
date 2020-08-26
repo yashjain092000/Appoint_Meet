@@ -17,19 +17,19 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
   void initState() {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Screen 1 Appointee",
+          name: "first screen",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.teal,
+          colorLineSelected: Colors.white,
         ),
         FirstScreen()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Screen 2 Appointee",
+          name: "second screen",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.orange,
+          colorLineSelected: Colors.white,
         ),
         SecondScreen()));
 
