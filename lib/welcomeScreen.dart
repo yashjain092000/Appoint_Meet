@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:nice_button/nice_button.dart';
-import 'auth_screen_appointee.dart';
-import 'auth_screen_appointer.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -17,18 +14,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     super.initState();
-
     controller = AnimationController(
       duration: Duration(seconds: 2),
       vsync: this,
     );
     animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+
     controller.forward();
     animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         controller.dispose();
       }
     });
+
     controller.addListener(() {
       setState(() {});
     });
@@ -36,16 +34,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    //scaffold
     return Scaffold(
       backgroundColor: Colors.white,
-      //main body
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -149,27 +145,28 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ],
             ),
           ),
-          Padding(
+          /*Padding(
             padding:
                 EdgeInsets.only(top: 140.0, left: 20, right: 20, bottom: 10),
-            child: Row(children: <Widget>[
-              NiceButton(
-                radius: 40,
-                elevation: 10,
-                padding: const EdgeInsets.all(15),
-                icon: Icons.account_circle,
-                text: "Appointee",
-                gradientColors: [Colors.deepPurple, Colors.white],
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AuthScreenAppointee()),
-                  );
-                },
-                background: Colors.white,
-              ),
-            ]),
+            child: Row(
+              children: <Widget>[
+                NiceButton(
+                  radius: 40,
+                  elevation: 10,
+                  padding: const EdgeInsets.all(15),
+                  icon: Icons.account_circle,
+                  text: "Appointee",
+                  gradientColors: [Colors.deepPurple, Colors.white],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AuthScreen()),
+                    );
+                  },
+                  background: Colors.white,
+                )
+              ],
+            ),
           ),
           Padding(
             padding:
@@ -195,7 +192,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 )
               ],
             ),
-          ),
+          ),*/
         ],
       ),
     );
