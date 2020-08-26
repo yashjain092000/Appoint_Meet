@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "7748025260",
+    "firebase_url": "https://appointmeet-28480.firebaseio.com",
+    "project_id": "appointmeet-28480",
+    "storage_bucket": "appointmeet-28480.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7748025260:android:b7cda80b874406e0b89809",
+        "android_client_info": {
+          "package_name": "com.example.Appoint_Meet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7748025260-mvn77aeca81ft5ne7v2213vu6l51clfg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq5MyUNDi7QkK9k3J4xo_DMPdNaokMYxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7748025260-mvn77aeca81ft5ne7v2213vu6l51clfg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
