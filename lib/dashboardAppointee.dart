@@ -39,9 +39,9 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-      backgroundColorMenu: Colors.blueGrey,
-      backgroundColorAppBar: Colors.cyan,
-      disableAppBarDefault: false,
+      backgroundColorMenu: Colors.deepPurple,
+      backgroundColorAppBar: Colors.deepPurple,
+      disableAppBarDefault: true,
       screens: items,
     );
   }
