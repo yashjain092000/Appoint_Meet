@@ -23,10 +23,11 @@ class _SignupScreenState extends State<SignupScreen> {
     String specialisation,
     String fee,
     String emFee,
-    var morTime1,
-    var morTime2,
-    var eveTime1,
-    var eveTime2,
+    dynamic morTime1,
+    dynamic morTime2,
+    dynamic eveTime1,
+    dynamic eveTime2,
+    int eachTime,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -79,14 +80,15 @@ class _SignupScreenState extends State<SignupScreen> {
             .setData({
           'username': username,
           'specialisation': specialisation,
-          'phone no.': phn,
+          'phone_no': phn,
           'address': address,
           'normal_fee': fee,
           'emergency_fee': emFee,
           'morning_start_time': morTime1,
           'morning_end_time': morTime2,
           'evening_start_time': eveTime1,
-          'evening_end_time': eveTime2
+          'evening_end_time': eveTime2,
+          'patient_time': eachTime
         });
       }
     } on PlatformException catch (err) {

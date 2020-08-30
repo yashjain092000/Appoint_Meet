@@ -22,9 +22,10 @@ class AuthFormAppointer extends StatefulWidget {
     String fee,
     String emFee,
     dynamic morTime1,
-    dynamic morTime2,
-    dynamic eveTime1,
-    dynamic eveTime2,
+    int morTime2,
+    int eveTime1,
+    int eveTime2,
+    int eachTime,
     bool isLogin,
     BuildContext ctx,
   ) submitFn;
@@ -49,6 +50,7 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
   dynamic _morTime2;
   dynamic _eveTime1;
   dynamic _eveTime2;
+  int _eachTime = 0;
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
@@ -70,6 +72,7 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
           _morTime2,
           _eveTime1,
           _eveTime2,
+          _eachTime,
           _isLogin,
           context);
     }
@@ -324,6 +327,25 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                         thickness: 1.0,
                       ),
                     ]),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: ValueKey('eachTime'),
+                      validator: (value) {
+                        if (value.isEmpty || int.parse(value) == 0) {
+                          return 'Please enter a valid value';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.deepPurple),
+                          ),
+                          labelText: 'Time given to each appointee(in mins)',
+                          labelStyle: TextStyle(color: Colors.grey[600])),
+                      onSaved: (value) {
+                        _eachTime = int.parse(value);
+                      },
+                    ),
                   TextFormField(
                     key: ValueKey('password'),
                     validator: (value) {
