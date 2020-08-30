@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'firstScreen.dart';
 import 'secondScreen.dart';
+import 'CarouselPage.dart';
 
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 class DashboardAppointee extends StatefulWidget {
   @override
   _DashboardAppointeeState createState() => _DashboardAppointeeState();
@@ -22,7 +21,8 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
-        FirstScreen()));
+        //FirstScreen()
+        CarouselPage()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
