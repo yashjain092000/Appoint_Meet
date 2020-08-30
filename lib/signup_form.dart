@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+//import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class AuthFormAppointer extends StatefulWidget {
   AuthFormAppointer(
@@ -11,7 +12,6 @@ class AuthFormAppointer extends StatefulWidget {
   final bool isLoading;
 
   final void Function(
-    String typeUser,
     String email,
     String password,
     String userName,
@@ -22,9 +22,9 @@ class AuthFormAppointer extends StatefulWidget {
     String fee,
     String emFee,
     dynamic morTime1,
-    int morTime2,
-    int eveTime1,
-    int eveTime2,
+    dynamic morTime2,
+    dynamic eveTime1,
+    dynamic eveTime2,
     bool isLogin,
     BuildContext ctx,
   ) submitFn;
@@ -35,7 +35,6 @@ class AuthFormAppointer extends StatefulWidget {
 
 class _AuthFormAppointerState extends State<AuthFormAppointer> {
   final _formKey = GlobalKey<FormState>();
-  var _typeUser = 'Appointer';
   var _isLogin = true;
   var _userEmail = '';
   var _userName = '';
@@ -58,7 +57,6 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
     if (isValid) {
       _formKey.currentState.save();
       widget.submitFn(
-          _typeUser.trim(),
           _userEmail.trim(),
           _userPassword.trim(),
           _userName.trim(),
@@ -242,13 +240,90 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                       },
                     ),
                   if (!_isLogin)
-                    _morTime1 = BasicTimeField('Enter Shift-I start time'),
-                  if (!_isLogin)
-                    _morTime2 = BasicTimeField('Enter Shift-I end time'),
-                  if (!_isLogin)
-                    _eveTime1 = BasicTimeField('Enter Shift-II start time'),
-                  if (!_isLogin)
-                    _eveTime2 = BasicTimeField('Enter Shift-II end time'),
+                    Column(children: <Widget>[
+                      FlatButton(
+                          onPressed: () {
+                            DatePicker.showTime12hPicker(context,
+                                showTitleActions: true, onChanged: (date) {
+                              print('change $date in time zone ' +
+                                  date.timeZoneOffset.inHours.toString());
+                            }, onConfirm: (date) {
+                              _morTime1 = DateFormat("HH:mm a").format(date);
+                              print(_morTime1);
+                              // _morTime1 = date;
+                            }, currentTime: DateTime.now());
+                          },
+                          child: Text(
+                            'Enter Shift-I start time',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(color: Colors.grey[500]),
+                          )),
+                      Divider(
+                        color: Colors.grey[500],
+                        thickness: 1.0,
+                      ),
+                      FlatButton(
+                          onPressed: () {
+                            DatePicker.showTime12hPicker(context,
+                                showTitleActions: true, onChanged: (date) {
+                              print('change $date in time zone ' +
+                                  date.timeZoneOffset.inHours.toString());
+                            }, onConfirm: (date) {
+                              _morTime2 = DateFormat("HH:mm a").format(date);
+                              print(_morTime2);
+                              // _morTime1 = date;
+                            }, currentTime: DateTime.now());
+                          },
+                          child: Text(
+                            'Enter Shift-I end time',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(color: Colors.grey[500]),
+                          )),
+                      Divider(
+                        color: Colors.grey[500],
+                        thickness: 1.0,
+                      ),
+                      FlatButton(
+                          onPressed: () {
+                            DatePicker.showTime12hPicker(context,
+                                showTitleActions: true, onChanged: (date) {
+                              print('change $date in time zone ' +
+                                  date.timeZoneOffset.inHours.toString());
+                            }, onConfirm: (date) {
+                              _eveTime1 = DateFormat("HH:mm a").format(date);
+                              print(_eveTime1);
+                            }, currentTime: DateTime.now());
+                          },
+                          child: Text(
+                            'Enter Shift-II start time',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(color: Colors.grey[500]),
+                          )),
+                      Divider(
+                        color: Colors.grey[500],
+                        thickness: 1.0,
+                      ),
+                      FlatButton(
+                          onPressed: () {
+                            DatePicker.showTime12hPicker(context,
+                                showTitleActions: true, onChanged: (date) {
+                              print('change $date in time zone ' +
+                                  date.timeZoneOffset.inHours.toString());
+                            }, onConfirm: (date) {
+                              _eveTime2 = DateFormat("HH:mm a").format(date);
+                              print(_eveTime2);
+                            }, currentTime: DateTime.now());
+                          },
+                          child: Text(
+                            'Enter Shift-II end time',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(color: Colors.grey[500]),
+                          )),
+                      Divider(
+                        color: Colors.grey[500],
+                        thickness: 1.0,
+                      ),
+                    ]),
                   TextFormField(
                     key: ValueKey('password'),
                     validator: (value) {
@@ -262,7 +337,7 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                           borderSide: BorderSide(color: Colors.deepPurple),
                         ),
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.grey[600])),
+                        labelStyle: TextStyle(color: Colors.grey[500])),
                     obscureText: true,
                     onSaved: (value) {
                       _userPassword = value;
@@ -303,30 +378,30 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
 }
 
 // ignore: must_be_immutable
-class BasicTimeField extends StatelessWidget {
-  String displayText = '';
-  BasicTimeField(this.displayText);
-  final format = DateFormat("hh:mm a");
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      Text(
-        '$displayText (${format.pattern})',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.grey[600],
-        ),
-      ),
-      DateTimeField(
-        format: format,
-        onShowPicker: (context, currentValue) async {
-          final time = await showTimePicker(
-            context: context,
-            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-          );
-          return DateTimeField.convert(time);
-        },
-      ),
-    ]);
-  }
-}
+// class BasicTimeField extends StatelessWidget {
+//   String displayText = '';
+//   BasicTimeField(this.displayText);
+//   final format = DateFormat("hh:mm a");
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(children: <Widget>[
+//       Text(
+//         '$displayText (${format.pattern})',
+//         textAlign: TextAlign.center,
+//         style: TextStyle(
+//           color: Colors.grey[600],
+//         ),
+//       ),
+//       DateTimeField(
+//         format: format,
+//         onShowPicker: (context, currentValue) async {
+//           final time = await showTimePicker(
+//             context: context,
+//             initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+//           );
+//           return DateTimeField.convert(time);
+//         },
+//       ),
+//     ]);
+//   }
+// }

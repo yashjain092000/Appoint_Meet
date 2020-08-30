@@ -14,7 +14,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   var _isLoading = false;
   void _submitAuthForm(
-    String typeUser,
     String email,
     String password,
     String username,
@@ -24,10 +23,10 @@ class _SignupScreenState extends State<SignupScreen> {
     String specialisation,
     String fee,
     String emFee,
-    dynamic morTime1,
-    dynamic morTime2,
-    dynamic eveTime1,
-    dynamic eveTime2,
+    var morTime1,
+    var morTime2,
+    var eveTime1,
+    var eveTime2,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -46,8 +45,11 @@ class _SignupScreenState extends State<SignupScreen> {
         await Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
-            .setData(
-                {'username': username, 'email': email, 'typeUser': typeUser});
+            .setData({
+          'username': username,
+          'email': email,
+          'typeUser': 'Appointee'
+        });
         await Firestore.instance
             .collection('Appointees')
             .document(authResult.user.uid)
@@ -66,8 +68,11 @@ class _SignupScreenState extends State<SignupScreen> {
         await Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
-            .setData(
-                {'username': username, 'email': email, 'typeUser': typeUser});
+            .setData({
+          'username': username,
+          'email': email,
+          'typeUser': 'Appointer'
+        });
         await Firestore.instance
             .collection('Appointers')
             .document(authResult.user.uid)
