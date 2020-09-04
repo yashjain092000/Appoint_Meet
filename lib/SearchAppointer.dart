@@ -58,7 +58,7 @@ class FoodItemsSearch extends SearchDelegate<Details> {
         ? detailList
         : detailList.where((p) => p.userName.startsWith(query)).toList();
     return mylist.isEmpty
-        ? Text('No results Found!!.......')
+        ? Text('No results Found!!......')
         : ListView.builder(
             itemCount: mylist.length,
             itemBuilder: (context, index) {
