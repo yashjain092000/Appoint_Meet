@@ -1,6 +1,5 @@
-import 'package:demo/detailsClass.dart';
+import 'detailsClass.dart';
 import 'package:flutter/material.dart';
-//import 'ListClass.dart';
 import 'firstScreen.dart';
 import 'detailList.dart';
 
