@@ -13,7 +13,7 @@ class SearchCheck extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: FoodItemsSearch());
+                showSearch(context: context, delegate: AppointerNameSearch());
               },
               icon: Icon(Icons.search, color: Colors.deepPurple),
             )
@@ -25,7 +25,7 @@ class SearchCheck extends StatelessWidget {
   }
 }
 
-class FoodItemsSearch extends SearchDelegate<Details> {
+class AppointerNameSearch extends SearchDelegate<Details> {
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
