@@ -19,8 +19,8 @@ class AuthFormAppointer extends StatefulWidget {
     int age,
     String address,
     String specialisation,
-    String fee,
-    String emFee,
+    int fee,
+    int emFee,
     dynamic morTime1,
     int morTime2,
     int eveTime1,
@@ -44,8 +44,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
   int _age = 0;
   String _address = '';
   String _specialisation = '';
-  String _fee = '';
-  String _emFee = '';
+  int _fee = 0;
+  int _emFee = 0;
   dynamic _morTime1;
   dynamic _morTime2;
   dynamic _eveTime1;
@@ -66,8 +66,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
           _age,
           _address.trim(),
           _specialisation.trim(),
-          _fee.trim(),
-          _emFee.trim(),
+          _fee,
+          _emFee,
           _morTime1,
           _morTime2,
           _eveTime1,
@@ -220,7 +220,7 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                           labelText: 'Consultation Fee',
                           labelStyle: TextStyle(color: Colors.grey[600])),
                       onSaved: (value) {
-                        _fee = value;
+                        _fee = int.parse(value);
                       },
                     ),
                   if (!_isLogin)
@@ -239,7 +239,7 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                           labelText: 'Emergency Fee',
                           labelStyle: TextStyle(color: Colors.grey[600])),
                       onSaved: (value) {
-                        _emFee = value;
+                        _emFee = int.parse(value);
                       },
                     ),
                   if (!_isLogin)

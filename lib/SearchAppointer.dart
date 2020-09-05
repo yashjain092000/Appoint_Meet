@@ -8,7 +8,7 @@ class SearchCheck extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Search Food Items'),
+          title: Text('Search Appointers'),
           backgroundColor: Colors.white,
           actions: <Widget>[
             IconButton(
