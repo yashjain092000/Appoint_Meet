@@ -1,15 +1,15 @@
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'firstScreen.dart';
-import 'detailList.dart';
+//import 'detailList.dart';
 
 class SearchCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Search Appointers'),
-          backgroundColor: Colors.white,
+          title: Text('Search Food Items'),
+          backgroundColor: Colors.blue,
           actions: <Widget>[
             IconButton(
               onPressed: () {
@@ -65,7 +65,42 @@ class AppointerNameSearch extends SearchDelegate<Details> {
               final Details listitem = mylist[index];
               return ListTile(
                 onTap: () {
-                  showResults(context);
+                  //showResults(context);
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (_) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: 200,
+                              width: 200,
+                              padding: EdgeInsets.all(10.0),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    AssetImage('images/logopng.png'),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Card(
+                                child: Text(
+                                  listitem.userName,
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                shadowColor: Colors.purple,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Card(
+                                child: Text(listitem.email,
+                                    style: TextStyle(fontSize: 30)),
+                                shadowColor: Colors.purple,
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
                 title: Column(
                   children: [
