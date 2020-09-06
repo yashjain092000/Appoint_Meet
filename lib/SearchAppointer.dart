@@ -1,13 +1,38 @@
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'firstScreen.dart';
+import 'CarouselPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SearchCheck extends StatelessWidget {
+class SearchBar extends StatefulWidget {
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  Widget getAppointerList = StreamBuilder(
+      stream: Firestore.instance.collection('users').snapshots(),
+      builder: (ctx, streamSnapshot) {
+        if (streamSnapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final document = streamSnapshot.data.documents;
+
+        for (int i = 0; i < document.length; i++) {
+          detailList.add(new Details(document[i]['typeUser'],
+              document[i]['username'], document[i]['email']));
+        }
+        deleteDublicate();
+
+        return Text('halwa');
+      });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Search Food Items'),
+          title: Text('Search Appointers'),
           backgroundColor: Colors.blue,
           actions: <Widget>[
             IconButton(
@@ -18,24 +43,13 @@ class SearchCheck extends StatelessWidget {
             )
           ]),
       body: Column(
-        children: [Text("to kese hap")],
+        children: [Text("to kese hap"), CarouselPage(), getAppointerList],
       ),
     );
   }
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            query = "";
-          })
-    ];
-  }
-
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
@@ -110,5 +124,11 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                 ),
               );
             });
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return null;
   }
 }
