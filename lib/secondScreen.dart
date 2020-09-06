@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'detailsClass.dart';
+import 'SearchAppointer.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -28,6 +29,7 @@ class _SecondScreenState extends State<SecondScreen> {
       });
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[Text('afhahhka'), getAppointerList]);
+    return Column(
+        children: <Widget>[Text('afhahhka'), getAppointerList, SearchCheck()]);
   }
 }
