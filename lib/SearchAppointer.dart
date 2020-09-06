@@ -1,7 +1,6 @@
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'firstScreen.dart';
-//import 'detailList.dart';
 
 class SearchCheck extends StatelessWidget {
   @override

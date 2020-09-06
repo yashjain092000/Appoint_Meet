@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'detailList.dart';
 import 'detailsClass.dart';
 
 class SecondScreen extends StatefulWidget {
@@ -10,7 +8,7 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  Widget A = StreamBuilder(
+  Widget getAppointerList = StreamBuilder(
       stream: Firestore.instance.collection('users').snapshots(),
       builder: (ctx, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
@@ -30,6 +28,6 @@ class _SecondScreenState extends State<SecondScreen> {
       });
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[Text('afhahhka'), A]);
+    return Column(children: <Widget>[Text('afhahhka'), getAppointerList]);
   }
 }
