@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'detailsClass.dart';
 import 'SearchAppointer.dart';
+import 'CarouselPage.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -29,7 +30,11 @@ class _SecondScreenState extends State<SecondScreen> {
       });
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: <Widget>[Text('afhahhka'), getAppointerList, SearchCheck()]);
+    return Column(children: <Widget>[
+      getAppointerList,
+      SearchCheck(),
+      Text('afhahhka'),
+      CarouselPage()
+    ]);
   }
 }
