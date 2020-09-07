@@ -101,41 +101,45 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Column(
                   children: <Widget>[
                     Row(children: <Widget>[
+                      SizedBox(height: 70),
                       Text(
                         "One place where you can ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 22.0,
+                          fontSize: 26.0,
                           fontWeight: FontWeight.w500,
                         ),
                       )
                     ]),
+                    SizedBox(height: 30),
                     Row(children: <Widget>[
                       Text(
                         "Book your appointments",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.w300,
                         ),
                       )
                     ]),
+                    SizedBox(height: 14),
                     Row(children: <Widget>[
                       Text(
                         "Manage your appointments",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.w300,
                         ),
                       )
                     ]),
+                    SizedBox(height: 14),
                     Row(children: <Widget>[
                       Text(
                         "Get your appointments booked",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.w300,
                         ),
                       )

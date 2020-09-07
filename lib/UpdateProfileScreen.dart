@@ -32,15 +32,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     fontFamily: "Agne",
                     fontWeight: FontWeight.w500),
                 textAlign: TextAlign.start,
-                alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                ),
+                alignment: AlignmentDirectional.topStart),
           ),
           SizedBox(height: 20.0),
           Container(
             padding: EdgeInsets.all(10.0),
             child: CircleAvatar(
               backgroundColor: Colors.deepPurple,
-              backgroundImage: AssetImage('images/Profile.jpg'),
+              // backgroundImage: AssetImage('images/Profile.jpg'),
               minRadius: 100.0,
             ),
           ),
