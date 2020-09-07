@@ -74,43 +74,46 @@ class AppointerNameSearch extends SearchDelegate<Details> {
         ? Text('No results Found!!......')
         : GridView.builder(
             itemCount: mylist.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 4.0,crossAxisSpacing: 4.0,childAspectRatio: 0.65),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+                childAspectRatio: 0.65),
             itemBuilder: (context, index) {
               final Details listitem = mylist[index];
               return InkWell(
                 child: Card(
                   color: Colors.white10,
                   child: Column(
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 100,
-                              padding: EdgeInsets.all(10.0),
-                              child: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('images/logopng.png'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
-                                child: Text(
-                                  listitem.userName,
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                shadowColor: Colors.purple,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
-                                child: Text(listitem.email,
-                                    style: TextStyle(fontSize: 20)),
-                                shadowColor: Colors.purple,
-                              ),
-                            ),
-                          ],
-                        );,
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        padding: EdgeInsets.all(10.0),
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage('images/logopng.png'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          child: Text(
+                            listitem.userName,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          shadowColor: Colors.purple,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          child: Text(listitem.email,
+                              style: TextStyle(fontSize: 20)),
+                          shadowColor: Colors.purple,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 onTap: () {
                   showModalBottomSheet(
