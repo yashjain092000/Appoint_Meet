@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'firstScreen.dart';
+import 'UpdateProfileScreen.dart';
 import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -24,21 +24,21 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
         SearchBar()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "first screen",
+          name: "My Appointments",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
-        FirstScreen()));
+        UpdateProfileScreen()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "second screen",
+          name: "Settings",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
-        FirstScreen()));
+        UpdateProfileScreen()));
 
     super.initState();
   }
