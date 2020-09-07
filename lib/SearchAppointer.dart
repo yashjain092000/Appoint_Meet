@@ -249,7 +249,9 @@ class AppointerNameSearch extends SearchDelegate<Details> {
         ? detailList
         : detailList.where((p) => p.userName.startsWith(query)).toList();
     return mylist.isEmpty
-        ? Text('No results Found!!......')
+        ? Text(
+            'No results Found!!...',
+          )
         : GridView.builder(
             itemCount: mylist.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -304,8 +306,9 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                               width: 200,
                               padding: EdgeInsets.all(10.0),
                               child: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('images/logopng.png'),
+                                // backgroundImage:
+                                //AssetImage('images/logopng.png'),
+                                backgroundColor: Colors.deepPurple,
                               ),
                             ),
                             Padding(

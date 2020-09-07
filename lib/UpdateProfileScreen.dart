@@ -38,7 +38,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             padding: EdgeInsets.all(10.0),
             child: CircleAvatar(
               backgroundColor: Colors.deepPurple,
-              // backgroundImage: AssetImage('images/Profile.jpg'),
+              backgroundImage: AssetImage('images/Profile.jpg'),
               minRadius: 100.0,
             ),
           ),
