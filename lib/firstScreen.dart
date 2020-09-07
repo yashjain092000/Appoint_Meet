@@ -10,9 +10,8 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
           child: Text("hello mukul"),
-        ));
+        );
   }
 }
