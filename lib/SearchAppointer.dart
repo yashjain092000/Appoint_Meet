@@ -9,7 +9,7 @@ class SearchCheck extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text('Search Food Items'),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue,
           actions: <Widget>[
             IconButton(
               onPressed: () {
@@ -59,21 +59,87 @@ class AppointerNameSearch extends SearchDelegate<Details> {
         : detailList.where((p) => p.userName.startsWith(query)).toList();
     return mylist.isEmpty
         ? Text('No results Found!!......')
-        : ListView.builder(
+        : GridView.builder(
             itemCount: mylist.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 4.0,
+                childAspectRatio: 0.6),
             itemBuilder: (context, index) {
               final Details listitem = mylist[index];
-              return ListTile(
-                onTap: () {
-                  showResults(context);
-                },
-                title: Column(
-                  children: [
-                    Text(listitem.userName),
-                    Text(listitem.email),
-                    Divider(),
-                  ],
+              return InkWell(
+                child: Card(
+                  color: Colors.white10,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        padding: EdgeInsets.all(10.0),
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage('images/logopng.png'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          child: Text(
+                            listitem.userName,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          shadowColor: Colors.purple,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          child: Text(listitem.email,
+                              style: TextStyle(fontSize: 20)),
+                          shadowColor: Colors.purple,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                onTap: () {
+                  //showResults(context);
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (_) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: 200,
+                              width: 200,
+                              padding: EdgeInsets.all(10.0),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    AssetImage('images/logopng.png'),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Card(
+                                child: Text(
+                                  listitem.userName,
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                shadowColor: Colors.purple,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Card(
+                                child: Text(listitem.email,
+                                    style: TextStyle(fontSize: 30)),
+                                shadowColor: Colors.purple,
+                              ),
+                            ),
+                          ],
+                        );
+                      });
+                },
               );
             });
   }

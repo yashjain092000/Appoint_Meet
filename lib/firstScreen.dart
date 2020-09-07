@@ -1,7 +1,9 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'detailList.dart';
+import 'detailsClass.dart';
 
 class FirstScreen extends StatefulWidget {
   @override
@@ -42,8 +44,31 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
           ],
         ),
-        body: Container(
-          child: Text("hello"),
-        ));
+        body: StreamBuilder(
+            stream: Firestore.instance.collection('users').snapshots(),
+            builder: (ctx, streamSnapshot) {
+              if (streamSnapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final document = streamSnapshot.data.documents;
+
+              for (int i = 0; i < document.length; i++) {
+                detailList.add(new Details(document[i]['typeUser'],
+                    document[i]['username'], document[i]['email']));
+              }
+              deleteDublicate();
+
+              return ListView.builder(
+                  itemCount: detailList.length,
+                  itemBuilder: (context, index) {
+                    return //_buildListItem(context, document[index], index);
+                        ListTile(
+                      title: Text(detailList[index].userName),
+                      subtitle: Text(detailList[index].userEmail),
+                    );
+                  });
+            }));
   }
 }
