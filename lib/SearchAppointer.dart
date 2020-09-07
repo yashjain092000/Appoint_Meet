@@ -10,6 +10,17 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  List<Details> todo = [
+    new Details("Appointee", "Harry", "harry@gmail.com"),
+    new Details("Appointee", "Abhishek", "abhishek@gmail.com"),
+    new Details("Appointee", "Rishi", "rishi@gmail.com"),
+    new Details("Appointee", "Susan", "susan@gmail.com"),
+    new Details("Appointee", "Yash", "yash@gmail.com"),
+    new Details("Appointee", "Shivam", "shivam@gmail.com"),
+    new Details("Appointee", "Ishan", "ishan@gmail.com"),
+    new Details("Appointee", "Rahul", "rahul@gmail.com"),
+    new Details("Appointee", "Rishabh", "rishabh@gmail.com"),
+  ];
   Widget getAppointerList = StreamBuilder(
       stream: Firestore.instance.collection('users').snapshots(),
       builder: (ctx, streamSnapshot) {
@@ -26,7 +37,9 @@ class _SearchBarState extends State<SearchBar> {
         }
         deleteDublicate();
 
-        return Text('halwa');
+        return SizedBox(
+          height: 10,
+        );
       });
   @override
   Widget build(BuildContext context) {
@@ -43,7 +56,116 @@ class _SearchBarState extends State<SearchBar> {
             )
           ]),
       body: Column(
-        children: [Text("to kese hap"), CarouselPage(), getAppointerList],
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          CarouselPage(),
+          getAppointerList,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "Next Appointment At",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Card(
+                      color: Colors.deepPurple,
+                      shadowColor: Colors.deepPurple[400],
+                      elevation: 10.0,
+                      child: Text("2:30 pm",
+                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text("Appointments to take", style: TextStyle(fontSize: 20)),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Card(
+                        color: Colors.deepPurple,
+                        //margin: EdgeInsets.all(10),
+                        shadowColor: Colors.deepPurple[400],
+                        elevation: 10.0,
+                        child: Text("10",
+                            style:
+                                TextStyle(fontSize: 25, color: Colors.white)),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: todo.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      elevation: 10.0,
+                      shadowColor: Colors.deepPurple[400],
+                      color: Colors.white,
+                      child: ListTile(
+                        title: Center(child: Text(todo[index].userName)),
+                        subtitle: Center(child: Text(todo[index].email)),
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (_) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      width: 200,
+                                      padding: EdgeInsets.all(10.0),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage('images/logopng.png'),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Card(
+                                        child: Text(
+                                          todo[index].userName,
+                                          style: TextStyle(fontSize: 30),
+                                        ),
+                                        shadowColor: Colors.purple,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Card(
+                                        child: Text(todo[index].email,
+                                            style: TextStyle(fontSize: 30)),
+                                        shadowColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    );
+                  }))
+        ],
       ),
     );
   }
