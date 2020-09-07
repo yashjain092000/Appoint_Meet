@@ -9,6 +9,17 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  List<Details> todo = [
+    new Details("Appointee", "Dr. Harry", "harry@gmail.com"),
+    new Details("Appointee", "Dr. Abhishek", "abhishek@gmail.com"),
+    new Details("Appointee", "Dr. Rishi", "rishi@gmail.com"),
+    new Details("Appointee", "Dr. Susan", "susan@gmail.com"),
+    new Details("Appointee", "Dr. Yash", "yash@gmail.com"),
+    new Details("Appointee", "Dr. Shivam", "shivam@gmail.com"),
+    new Details("Appointee", "Dr. Ishan", "ishan@gmail.com"),
+    new Details("Appointee", "Dr. Rahul", "rahul@gmail.com"),
+    new Details("Appointee", "Dr. Rishabh", "rishabh@gmail.com"),
+  ];
   Widget getAppointerList = StreamBuilder(
       stream: Firestore.instance.collection('users').snapshots(),
       builder: (ctx, streamSnapshot) {
