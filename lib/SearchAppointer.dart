@@ -57,13 +57,157 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ]),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          getAppointerList,
-          SizedBox(height: 50.0),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 30,
+          ),
           CarouselPage(),
+          getAppointerList,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Card(
+                    color: Colors.white,
+                    shadowColor: Colors.deepPurple[400],
+                    elevation: 10.0,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: Text(
+                            "Upcoming Appointment at",
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 14.0),
+                          child: Card(
+                            color: Colors.deepPurple,
+                            shadowColor: Colors.deepPurple[400],
+                            elevation: 10.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text("2:33 pm",
+                                  style: TextStyle(
+                                      fontSize: 25, color: Colors.white)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Card(
+                    color: Colors.white,
+                    shadowColor: Colors.deepPurple[400],
+                    elevation: 10.0,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            "Total Appointments",
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 14.0),
+                          child: Card(
+                            color: Colors.deepPurple,
+                            shadowColor: Colors.deepPurple[400],
+                            elevation: 10.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text("11",
+                                  style: TextStyle(
+                                      fontSize: 25, color: Colors.white)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: todo.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      elevation: 10.0,
+                      shadowColor: Colors.deepPurple[400],
+                      color: Colors.white,
+                      child: ListTile(
+                        title: Center(child: Text(todo[index].userName)),
+                        subtitle: Center(child: Text(todo[index].email)),
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (_) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      width: 200,
+                                      padding: EdgeInsets.all(10.0),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage('images/logopng.png'),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 10.0,
+                                          bottom: 10.0,
+                                          left: 30,
+                                          right: 30.0),
+                                      child: Card(
+                                        child: Text(
+                                          todo[index].userName,
+                                          style: TextStyle(fontSize: 30),
+                                        ),
+                                        shadowColor: Colors.purple,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 10.0,
+                                          bottom: 10.0,
+                                          left: 30,
+                                          right: 30.0),
+                                      child: Card(
+                                        child: Text(todo[index].email,
+                                            style: TextStyle(fontSize: 30)),
+                                        shadowColor: Colors.purple,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    );
+                  }))
         ],
       ),
     );
