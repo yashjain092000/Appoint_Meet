@@ -78,7 +78,6 @@ class AppointerNameSearch extends SearchDelegate<Details> {
               final Details listitem = mylist[index];
               return ListTile(
                 onTap: () {
-                  //showResults(context);
                   showModalBottomSheet(
                       context: context,
                       builder: (_) {
@@ -128,7 +127,6 @@ class AppointerNameSearch extends SearchDelegate<Details> {
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
     return null;
   }
 }

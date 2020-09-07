@@ -32,7 +32,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
         FirstScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "second screen",
+          name: "search",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
