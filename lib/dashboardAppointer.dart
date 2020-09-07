@@ -39,7 +39,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
     return HiddenDrawerMenu(
       backgroundColorMenu: Colors.blueGrey,
       backgroundColorAppBar: Colors.cyan,
-      disableAppBarDefault: true,
+      disableAppBarDefault: false,
       screens: items,
     );
   }

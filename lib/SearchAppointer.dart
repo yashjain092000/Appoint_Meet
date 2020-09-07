@@ -1,6 +1,5 @@
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
-import 'firstScreen.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -26,24 +25,35 @@ class _SearchBarState extends State<SearchBar> {
         }
         deleteDublicate();
 
-        return Text('halwa');
+        return Text('');
       });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Search Appointers'),
-          backgroundColor: Colors.blue,
+          elevation: 20.0,
+          title: Text('Search Appointers',
+              style:
+                  TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
+          backgroundColor: Colors.white,
           actions: <Widget>[
             IconButton(
               onPressed: () {
                 showSearch(context: context, delegate: AppointerNameSearch());
               },
               icon: Icon(Icons.search, color: Colors.deepPurple),
-            )
+            ),
           ]),
       body: Column(
-        children: [Text("to kese hap"), CarouselPage(), getAppointerList],
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          getAppointerList,
+          SizedBox(height: 50.0),
+          CarouselPage(),
+        ],
       ),
     );
   }
@@ -61,8 +71,21 @@ class AppointerNameSearch extends SearchDelegate<Details> {
   }
 
   @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        color: Colors.deepPurple,
+        onPressed: () {
+          query = "";
+        },
+      )
+    ];
+  }
+
+  @override
   Widget buildResults(BuildContext context) {
-    return FirstScreen();
+    return SearchBar();
   }
 
   @override
@@ -154,10 +177,5 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                 },
               );
             });
-  }
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return null;
   }
 }
