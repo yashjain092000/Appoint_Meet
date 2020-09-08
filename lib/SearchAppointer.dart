@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//import 'detailsClass.dart';
+
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -215,6 +217,13 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
+  void addAppointment(String username, String mail) async {
+    await Firestore.instance
+        .collection('Appointments')
+        .document()
+        .setData({'username': username, 'email': mail});
+  }
+
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
@@ -329,6 +338,12 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                 shadowColor: Colors.purple,
                               ),
                             ),
+                            Card(
+                              child: FlatButton(
+                                  onPressed: () => addAppointment(
+                                      listitem.userName, listitem.email),
+                                  child: Text("Book")),
+                            )
                           ],
                         );
                       });

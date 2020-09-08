@@ -1,3 +1,4 @@
+import 'package:Appoint_Meet/appointMentscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'UpdateProfileScreen.dart';
@@ -29,7 +30,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
-        UpdateProfileScreen()));
+        AppointmentsScreen()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
