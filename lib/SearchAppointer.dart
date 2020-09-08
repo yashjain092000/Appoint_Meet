@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//import 'detailsClass.dart';
-
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -340,8 +338,11 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                             ),
                             Card(
                               child: FlatButton(
-                                  onPressed: () => addAppointment(
-                                      listitem.userName, listitem.email),
+                                  onPressed: () {
+                                    addAppointment(
+                                        listitem.userName, listitem.email);
+                                    Navigator.of(context).pop();
+                                  },
                                   child: Text("Book")),
                             )
                           ],
