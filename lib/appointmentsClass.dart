@@ -1,9 +1,9 @@
-class Details {
-  String userType;
+class Appointments {
+  //String userType;
   String userName;
   String email;
   //String userId;
-  Details(this.userType, this.userName, this.email);
+  Appointments(this.userName, this.email);
 
   String get userEmail => email;
 
@@ -20,14 +20,14 @@ class Details {
   // }
 }
 
-List<Details> detailList = [];
-void deleteDublicate() {
-  int m = detailList.length;
+List<Appointments> appointmentsList = [];
+void deleteDublicateAppointment() {
+  int m = appointmentsList.length;
   for (int i = 0; i < m; i++) {
-    String n = detailList[i].userEmail;
+    String n = appointmentsList[i].userEmail;
     for (int j = i + 1; j < m; j++) {
-      if (n == detailList[j].userEmail) {
-        detailList.removeAt(j);
+      if (n == appointmentsList[j].userEmail) {
+        appointmentsList.removeAt(j);
         m--;
       }
     }
