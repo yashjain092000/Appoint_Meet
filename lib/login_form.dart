@@ -47,7 +47,6 @@ class _AuthFormState extends State<AuthForm> {
           TypewriterAnimatedTextKit(
               speed: Duration(milliseconds: 300),
               totalRepeatCount: 0,
-              // repeatForever: false,
               text: ["Welcome Back!"],
               textStyle: TextStyle(
                   fontSize: 30,
