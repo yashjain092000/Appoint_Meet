@@ -158,6 +158,18 @@ class _SearchBarState extends State<SearchBar> {
                       shadowColor: Colors.deepPurple[400],
                       color: Colors.white,
                       child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.deepPurple,
+                          radius: 35,
+                          child: Text(
+                            todo[index].userName[0].toUpperCase() +
+                                todo[index].userName[4].toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         title: Center(child: Text(todo[index].userName)),
                         subtitle: Center(child: Text(todo[index].email)),
                         onTap: () {
