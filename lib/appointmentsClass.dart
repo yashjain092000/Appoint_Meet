@@ -1,9 +1,11 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 class Appointments {
   //String userType;
   String userName;
   String email;
+  String currentUserMail;
   //String userId;
-  Appointments(this.userName, this.email);
+  Appointments(this.userName, this.email, this.currentUserMail);
 
   String get userEmail => email;
 

@@ -2,6 +2,7 @@ class Details {
   String userType;
   String userName;
   String email;
+  //String currentUser;
   //String userId;
   Details(this.userType, this.userName, this.email);
 

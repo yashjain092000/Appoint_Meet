@@ -2,7 +2,7 @@ import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'detailsClass.dart';
 
 class SearchBar extends StatefulWidget {
@@ -40,6 +40,22 @@ class _SearchBarState extends State<SearchBar> {
 
         return Text('');
       });
+  /*String currentMail;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  getCurrentUserMail() async {
+    final FirebaseUser user = await auth.currentUser();
+    //final uid = user.uid;
+    final uemail = user.email;
+    setState(() {
+      currentMail = uemail;
+    });
+    //print(uemail);
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUserMail();
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -217,11 +233,22 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  void addAppointment(String username, String mail) async {
+  String currentMail;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  getCurrentUserMail() async {
+    final FirebaseUser user = await auth.currentUser();
+    //final uid = user.uid;
+    final uemail = user.email;
+
+    currentMail = uemail;
+    //print(uemail);
+  }
+
+  void addAppointment(String username, String mail, String curr) async {
     await Firestore.instance
         .collection('Appointments')
         .document()
-        .setData({'username': username, 'email': mail});
+        .setData({'username': username, 'email': mail, 'currentEmail': curr});
   }
 
   @override
@@ -339,11 +366,13 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                               ),
                             ),
                             Card(
-                              child: FlatButton(
-                                  onPressed: () => addAppointment(
-                                      listitem.userName, listitem.email),
-                                  child: Text("Book")),
-                            )
+                                child: FlatButton(
+                                    onPressed: () {
+                                      getCurrentUserMail();
+                                      addAppointment(listitem.userName,
+                                          listitem.email, currentMail);
+                                    },
+                                    child: Text("Book")))
                           ],
                         );
                       });
