@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   @override
@@ -11,6 +12,21 @@ class AppointmentsScreen extends StatefulWidget {
 }
 
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
+  String currentMail;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  getCurrentUserMail() async {
+    final FirebaseUser user = await auth.currentUser();
+    final uemail = user.email;
+    setState(() {
+      currentMail = uemail;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUserMail();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +39,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
-
               for (int i = 0; i < documen.length; i++) {
                 appointmentsList.add(new Appointments(
-                    documen[i]['email'], documen[i]['username']));
+                    documen[i]['username'], documen[i]['email'], currentMail));
               }
               deleteDublicateAppointment();
 
@@ -35,6 +50,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(appointmentsList[index].email),
+                      subtitle: Text(appointmentsList[index].currentUserMail),
                     );
                   });
             }));

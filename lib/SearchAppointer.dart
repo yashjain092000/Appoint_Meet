@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+String currentUserMail;
 
 class SearchBar extends StatefulWidget {
   @override
@@ -9,6 +13,20 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  getCurrentUserMail() async {
+    final FirebaseUser user = await auth.currentUser();
+    final uemail = user.email;
+    setState(() {
+      currentUserMail = uemail;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUserMail();
+  }
+
   List<Details> todo = [
     new Details("Appointee", "Dr. Harry", "harry@gmail.com"),
     new Details("Appointee", "Dr. Abhishek", "abhishek@gmail.com"),
@@ -227,11 +245,13 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  void addAppointment(String username, String mail) async {
-    await Firestore.instance
-        .collection('Appointments')
-        .document()
-        .setData({'username': username, 'email': mail});
+  void addAppointment(
+      String username, String mail, String currentUserLoggedInMail) async {
+    await Firestore.instance.collection('Appointments').document().setData({
+      'username': username,
+      'email': mail,
+      'currentEmail': currentUserLoggedInMail
+    });
   }
 
   @override
@@ -337,7 +357,7 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                   listitem.userName,
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                shadowColor: Colors.purple,
+                                shadowColor: Colors.deepPurple,
                               ),
                             ),
                             Padding(
@@ -345,14 +365,15 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                               child: Card(
                                 child: Text(listitem.email,
                                     style: TextStyle(fontSize: 30)),
-                                shadowColor: Colors.purple,
+                                shadowColor: Colors.deepPurple,
                               ),
                             ),
                             Card(
                               child: FlatButton(
                                   onPressed: () {
-                                    addAppointment(
-                                        listitem.userName, listitem.email);
+                                    print(currentUserMail);
+                                    addAppointment(listitem.userName,
+                                        listitem.email, currentUserMail);
                                     Navigator.of(context).pop();
                                   },
                                   child: Text("Book")),
