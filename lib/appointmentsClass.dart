@@ -3,8 +3,11 @@ class Appointments {
   String userName;
   String email;
   String currentUserMail;
+  String bookedDate;
+  String bookingDate;
   //String userId;
-  Appointments(this.userName, this.email, this.currentUserMail);
+  Appointments(this.userName, this.email, this.currentUserMail, this.bookedDate,
+      this.bookingDate);
 
   String get userEmail => email;
 

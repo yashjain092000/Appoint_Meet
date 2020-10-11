@@ -41,8 +41,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               final documen = streamSnapshot.data.documents;
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['currentEmail'] == currentMail) {
-                  appointmentsList.add(new Appointments(documen[i]['username'],
-                      documen[i]['email'], currentMail));
+                  appointmentsList.add(new Appointments(
+                      documen[i]['username'],
+                      documen[i]['email'],
+                      currentMail,
+                      documen[i]['bookedDate'],
+                      documen[i]['dateOfBooking']));
                 }
               }
               deleteDublicateAppointment();
