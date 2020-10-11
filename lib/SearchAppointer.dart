@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:intl/intl.dart';
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
@@ -245,12 +245,14 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  void addAppointment(
-      String username, String mail, String currentUserLoggedInMail) async {
+  void addAppointment(String username, String mail,
+      String currentUserLoggedInMail, String bookDate, String bookTime) async {
     await Firestore.instance.collection('Appointments').document().setData({
       'username': username,
       'email': mail,
-      'currentEmail': currentUserLoggedInMail
+      'currentEmail': currentUserLoggedInMail,
+      'bookedDate': bookDate,
+      'dateOfBooking': bookTime
     });
   }
 
@@ -372,8 +374,15 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                               child: FlatButton(
                                   onPressed: () {
                                     print(currentUserMail);
-                                    addAppointment(listitem.userName,
-                                        listitem.email, currentUserMail);
+                                    addAppointment(
+                                      listitem.userName,
+                                      listitem.email,
+                                      currentUserMail,
+                                      DateFormat("yyyy-MM-dd HH:mm:ss")
+                                          .format(DateTime.now()),
+                                      DateFormat("yyyy-MM-dd HH:mm:ss")
+                                          .format(DateTime.now()),
+                                    );
                                     Navigator.of(context).pop();
                                   },
                                   child: Text("Book")),
