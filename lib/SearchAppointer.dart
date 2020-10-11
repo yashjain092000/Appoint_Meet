@@ -247,16 +247,16 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  void addAppointment(String username, String mail,
-      String currentUserLoggedInMail, String bookDate, String bookTime) async {
-    await Firestore.instance.collection('Appointments').document().setData({
-      'username': username,
-      'email': mail,
-      'currentEmail': currentUserLoggedInMail,
-      'bookedDate': selectedDate,
-      'dateOfBooking': bookTime
-    });
-  }
+  // void addAppointment(String username, String mail,
+  //     String currentUserLoggedInMail, String bookDate, String bookTime) async {
+  //   await Firestore.instance.collection('Appointments').document().setData({
+  //     'username': username,
+  //     'email': mail,
+  //     'currentEmail': currentUserLoggedInMail,
+  //     'bookedDate': selectedDate,
+  //     'dateOfBooking': bookTime
+  //   });
+  // }
 
   @override
   Widget buildLeading(BuildContext context) {
@@ -385,24 +385,24 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                   },
                                   child: Text("Choose Date")),
                             ),
-                            Card(
-                              child: FlatButton(
-                                  onPressed: () {
-                                    print(currentUserMail);
-                                    print(selectedDate);
-                                    addAppointment(
-                                      listitem.userName,
-                                      listitem.email,
-                                      currentUserMail,
-                                      DateFormat("yyyy-MM-dd HH:mm:ss")
-                                          .format(selectedDate),
-                                      DateFormat("yyyy-MM-dd HH:mm:ss")
-                                          .format(DateTime.now()),
-                                    );
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("Book")),
-                            )
+                            // Card(
+                            //   child: FlatButton(
+                            //       onPressed: () {
+                            //         print(currentUserMail);
+                            //         print(selectedDate);
+                            //         addAppointment(
+                            //           listitem.userName,
+                            //           listitem.email,
+                            //           currentUserMail,
+                            //           DateFormat("yyyy-MM-dd HH:mm:ss")
+                            //               .format(selectedDate),
+                            //           DateFormat("yyyy-MM-dd HH:mm:ss")
+                            //               .format(DateTime.now()),
+                            //         );
+                            //         Navigator.of(context).pop();
+                            //       },
+                            //       child: Text("Book")),
+                            // )
                           ],
                         );
                       });
