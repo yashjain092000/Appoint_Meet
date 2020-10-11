@@ -67,7 +67,7 @@ class _DatePickState extends State<DatePick> {
               RaisedButton(
                 onPressed: () => addAppointment(
                     userName, appointerMail, appointeeMail, selectedDate),
-                child: Text('Back'),
+                child: Text('Book'),
               ),
             RaisedButton(
               onPressed: () => Navigator.pop(context),
