@@ -1,5 +1,6 @@
+import 'package:Appoint_Meet/appointmentsClass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
@@ -29,17 +30,6 @@ class _SearchBarState extends State<SearchBar> {
     getCurrentUserMail();
   }
 
-  List<Details> todo = [
-    new Details("Appointee", "Dr. Harry", "harry@gmail.com"),
-    new Details("Appointee", "Dr. Abhishek", "abhishek@gmail.com"),
-    new Details("Appointee", "Dr. Rishi", "rishi@gmail.com"),
-    new Details("Appointee", "Dr. Susan", "susan@gmail.com"),
-    new Details("Appointee", "Dr. Yash", "yash@gmail.com"),
-    new Details("Appointee", "Dr. Shivam", "shivam@gmail.com"),
-    new Details("Appointee", "Dr. Ishan", "ishan@gmail.com"),
-    new Details("Appointee", "Dr. Rahul", "rahul@gmail.com"),
-    new Details("Appointee", "Dr. Rishabh", "rishabh@gmail.com"),
-  ];
   Widget getAppointerList = StreamBuilder(
       stream: Firestore.instance.collection('users').snapshots(),
       builder: (ctx, streamSnapshot) {
@@ -58,6 +48,33 @@ class _SearchBarState extends State<SearchBar> {
 
         return Text('');
       });
+  /*Widget getAppointmentsList = StreamBuilder(
+      stream: Firestore.instance.collection('Appointments').snapshots(),
+      builder: (ctx, streamSnapshot) {
+        if (streamSnapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final docu = streamSnapshot.data.documents;
+
+        for (int i = 0; i < docu.length; i++) {
+          if (docu[i]['currentEmail'] == currentUserMail) {
+            if (DateTime.parse(docu[i]['appointmentDate']).day ==
+                DateTime.now().day) {
+              todaysAppointments.add(new Appointments(
+                  docu[i]['username'],
+                  docu[i]['email'],
+                  currentUserMail,
+                  DateTime.parse(docu[i]['appointmentDate']),
+                  DateTime.parse(docu[i]['BookingTime'])));
+            }
+          }
+        }
+        deleteDublicateTodaysAppointment();
+
+        return Text('');
+      });*/
 
   @override
   Widget build(BuildContext context) {
@@ -76,172 +93,140 @@ class _SearchBarState extends State<SearchBar> {
               icon: Icon(Icons.search, color: Colors.deepPurple),
             ),
           ]),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          CarouselPage(),
-          getAppointerList,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Card(
-                    color: Colors.white,
-                    shadowColor: Colors.deepPurple[400],
-                    elevation: 10.0,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(14.0),
-                          child: Text(
-                            "Upcoming Appointment at",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w700),
-                          ),
+      body: Column(mainAxisSize: MainAxisSize.min, children: [
+        SizedBox(
+          height: 30,
+        ),
+        CarouselPage(),
+        getAppointerList,
+        //getAppointmentsList,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                Card(
+                  color: Colors.white,
+                  shadowColor: Colors.deepPurple[400],
+                  elevation: 10.0,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: Text(
+                          "Upcoming Appointment at",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 14.0),
-                          child: Card(
-                            color: Colors.deepPurple,
-                            shadowColor: Colors.deepPurple[400],
-                            elevation: 10.0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text("2:33 pm",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Card(
-                    color: Colors.white,
-                    shadowColor: Colors.deepPurple[400],
-                    elevation: 10.0,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "Total Appointments",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 14.0),
-                          child: Card(
-                            color: Colors.deepPurple,
-                            shadowColor: Colors.deepPurple[400],
-                            elevation: 10.0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text("11",
-                                  style: TextStyle(
-                                      fontSize: 25, color: Colors.white)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: todo.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 10.0,
-                      shadowColor: Colors.deepPurple[400],
-                      color: Colors.white,
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.deepPurple,
-                          radius: 35,
-                          child: Text(
-                            todo[index].userName[0].toUpperCase() +
-                                todo[index].userName[4].toUpperCase(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        title: Center(child: Text(todo[index].userName)),
-                        subtitle: Center(child: Text(todo[index].email)),
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (_) {
-                                return Column(
-                                  children: [
-                                    Container(
-                                      height: 200,
-                                      width: 200,
-                                      padding: EdgeInsets.all(10.0),
-                                      child: CircleAvatar(
-                                        backgroundImage:
-                                            AssetImage('images/logopng.png'),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 10.0,
-                                          bottom: 10.0,
-                                          left: 30,
-                                          right: 30.0),
-                                      child: Card(
-                                        child: Text(
-                                          todo[index].userName,
-                                          style: TextStyle(fontSize: 30),
-                                        ),
-                                        shadowColor: Colors.purple,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 10.0,
-                                          bottom: 10.0,
-                                          left: 30,
-                                          right: 30.0),
-                                      child: Card(
-                                        child: Text(todo[index].email,
-                                            style: TextStyle(fontSize: 30)),
-                                        shadowColor: Colors.purple,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        },
                       ),
-                    );
-                  }))
-        ],
-      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 14.0),
+                        child: Card(
+                          color: Colors.deepPurple,
+                          shadowColor: Colors.deepPurple[400],
+                          elevation: 10.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text("2:33 pm",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.white)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Card(
+                  color: Colors.white,
+                  shadowColor: Colors.deepPurple[400],
+                  elevation: 10.0,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "Total Appointments",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 14.0),
+                        child: Card(
+                          color: Colors.deepPurple,
+                          shadowColor: Colors.deepPurple[400],
+                          elevation: 10.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text("11",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.white)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: StreamBuilder(
+              stream: Firestore.instance.collection('Appointments').snapshots(),
+              builder: (ctx, streamSnapshot) {
+                if (streamSnapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                final docu = streamSnapshot.data.documents;
+
+                for (int i = 0; i < docu.length; i++) {
+                  if (docu[i]['currentEmail'] == currentUserMail) {
+                    if (DateTime.parse(docu[i]['appointmentDate']).day ==
+                        DateTime.now().day) {
+                      todaysAppointments.add(new Appointments(
+                          docu[i]['username'],
+                          docu[i]['email'],
+                          currentUserMail,
+                          DateTime.parse(docu[i]['appointmentDate']),
+                          DateTime.parse(docu[i]['BookingTime'])));
+                    }
+                  }
+                }
+                deleteDublicateTodaysAppointment();
+                //print(todaysAppointments);
+                return ListView.builder(
+                    //shrinkWrap: true,
+                    itemCount: todaysAppointments.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(todaysAppointments[index].email),
+                          subtitle:
+                              Text(todaysAppointments[index].currentUserMail),
+                          trailing: Text((index + 1).toString()),
+                        ),
+                      );
+                    });
+              }),
+        ),
+      ]),
     );
   }
 }

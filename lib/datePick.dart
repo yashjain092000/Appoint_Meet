@@ -4,17 +4,17 @@ import 'package:intl/intl.dart';
 
 DateTime selectedDate = DateTime.now();
 DateTime checkDate = DateTime.now();
-String appointerMail;
-String appointeeMail;
-String userName;
+String appointerMail = '';
+String appointeeMail = '';
+String userName = '';
 DateTime bookingTime;
 
 // ignore: must_be_immutable
 class DatePick extends StatefulWidget {
-  DatePick(String userName, String appointerMail, String appointeeMail) {
-    userName = userName;
-    appointerMail = appointerMail;
-    appointeeMail = appointeeMail;
+  DatePick(String uName, String appointMail, String appointeMail) {
+    userName = uName;
+    appointerMail = appointMail;
+    appointeeMail = appointeMail;
   }
   @override
   _DatePickState createState() => _DatePickState();
