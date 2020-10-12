@@ -15,8 +15,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: Duration(seconds: 2),
       vsync: this,
+      duration: Duration(seconds: 2),
     );
     animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
 

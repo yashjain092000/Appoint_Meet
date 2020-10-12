@@ -45,18 +45,20 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                       documen[i]['username'],
                       documen[i]['email'],
                       currentMail,
-                      documen[i]['bookedDate'],
-                      documen[i]['dateOfBooking']));
+                      DateTime.parse(documen[i]['appointmentDate']),
+                      DateTime.parse(documen[i]['BookingTime'])));
                 }
               }
               deleteDublicateAppointment();
-
+              sortDate();
+              //sortList();
               return ListView.builder(
                   itemCount: appointmentsList.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(appointmentsList[index].email),
                       subtitle: Text(appointmentsList[index].currentUserMail),
+                      trailing: Text(index.toString()),
                     );
                   });
             }));
