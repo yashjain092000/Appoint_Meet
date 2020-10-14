@@ -1,8 +1,6 @@
 import 'package:Appoint_Meet/appointmentsClass.dart';
 //import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -58,7 +56,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     return ListTile(
                       title: Text(appointmentsList[index].email),
                       subtitle: Text(appointmentsList[index].currentUserMail),
-                      trailing: Text(index.toString()),
+                      trailing: Text((index + 1).toString()),
                     );
                   });
             }));
