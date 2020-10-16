@@ -1,7 +1,8 @@
+import 'package:Appoint_Meet/mainDashboardAppointer.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'UpdateProfileScreen.dart';
-import 'CarouselPage.dart';
+//import 'CarouselPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DashboardAppointer extends StatefulWidget {
@@ -21,7 +22,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
         ),
-        CarouselPage()));
+        MainDashboardAppointer()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(

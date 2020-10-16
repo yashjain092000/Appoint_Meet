@@ -31,10 +31,10 @@ class AuthFormAppointer extends StatefulWidget {
     String specialisation,
     int fee,
     int emFee,
-    dynamic morTime1,
-    int morTime2,
-    int eveTime1,
-    int eveTime2,
+    String morTime1,
+    String morTime2,
+    String eveTime1,
+    String eveTime2,
     int eachTime,
     bool isLogin,
     BuildContext ctx,
@@ -56,10 +56,10 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
   String _specialisation = '';
   int _fee = 0;
   int _emFee = 0;
-  dynamic _morTime1;
-  dynamic _morTime2;
-  dynamic _eveTime1;
-  dynamic _eveTime2;
+  String _morTime1;
+  String _morTime2;
+  String _eveTime1;
+  String _eveTime2;
   int _eachTime = 0;
 
   void _trySubmit() {
