@@ -62,5 +62,11 @@ void sortDate() {
 }
 
 void sortList() {
-  todaysAppointments.sort((a, b) => a.bookingDate.compareTo(b.bookingDate));
+  todaysAppointments.sort((a, b) {
+    if (a.bookedDate.compareTo(b.bookedDate) == 0) {
+      return a.bookingDate.compareTo(b.bookingDate);
+    }
+    return a.bookedDate.compareTo(b.bookedDate);
+  });
+  //todaysAppointments.sort((a, b) => a.bookingDate.compareTo(b.bookingDate));
 }

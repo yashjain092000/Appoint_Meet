@@ -198,7 +198,7 @@ class _SearchBarState extends State<SearchBar> {
 
                 for (int i = 0; i < docu.length; i++) {
                   if (docu[i]['currentEmail'] == currentUserMail) {
-                    if (DateTime.parse(docu[i]['appointmentDate']).day ==
+                    if (DateTime.parse(docu[i]['appointmentDate']).day >=
                         DateTime.now().day) {
                       todaysAppointments.add(new Appointments(
                           docu[i]['username'],
@@ -210,6 +210,7 @@ class _SearchBarState extends State<SearchBar> {
                   }
                 }
                 deleteDublicateTodaysAppointment();
+                sortList();
                 //print(todaysAppointments);
                 return ListView.builder(
                     //shrinkWrap: true,
