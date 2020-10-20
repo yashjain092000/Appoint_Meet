@@ -8,13 +8,15 @@ String appointerMail = '';
 String appointeeMail = '';
 String userName = '';
 DateTime bookingTime;
+int i;
 
 // ignore: must_be_immutable
 class DatePick extends StatefulWidget {
-  DatePick(String uName, String appointMail, String appointeMail) {
+  DatePick(String uName, String appointMail, String appointeMail, int j) {
     userName = uName;
     appointerMail = appointMail;
     appointeeMail = appointeMail;
+    i = j;
   }
   @override
   _DatePickState createState() => _DatePickState();
@@ -39,13 +41,18 @@ class _DatePickState extends State<DatePick> {
   }
 
   void addAppointment(String username, String mail,
-      String currentUserLoggedInMail, DateTime bookDate) async {
-    await Firestore.instance.collection('Appointments').document().setData({
+      String currentUserLoggedInMail, DateTime bookDate, int c) async {
+    await Firestore.instance
+        .collection('Appointments')
+        .document(c.toString())
+        .setData({
       'username': username,
       'email': mail,
       'currentEmail': currentUserLoggedInMail,
       'appointmentDate': DateFormat("yyyy-MM-dd HH:mm:ss").format(bookDate),
-      'BookingTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now())
+      'BookingTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()),
+      'Appointment_time': "not set yet",
+      'Appointment_no': 0,
     });
   }
 
@@ -66,7 +73,7 @@ class _DatePickState extends State<DatePick> {
             if (selectedDate != checkDate)
               RaisedButton(
                 onPressed: () => addAppointment(
-                    userName, appointerMail, appointeeMail, selectedDate),
+                    userName, appointerMail, appointeeMail, selectedDate, i),
                 child: Text('Book'),
               ),
             RaisedButton(

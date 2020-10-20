@@ -1,5 +1,6 @@
 import 'package:Appoint_Meet/appointmentsClass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:flutter/services.dart';
 //import 'package:intl/intl.dart';
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'datePick.dart';
 
 String currentUserMail;
 DateTime selectedDate;
+int d = 0;
 
 class SearchBar extends StatefulWidget {
   @override
@@ -25,6 +27,7 @@ class _SearchBarState extends State<SearchBar> {
     });
   }
 
+  List<Appointments> todaysAppointments = [];
   void initState() {
     super.initState();
     getCurrentUserMail();
@@ -75,7 +78,6 @@ class _SearchBarState extends State<SearchBar> {
 
         return Text('');
       });*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,8 +211,20 @@ class _SearchBarState extends State<SearchBar> {
                     }
                   }
                 }
-                deleteDublicateTodaysAppointment();
-                sortList();
+
+                deleteDublicateTodaysAppointment(todaysAppointments);
+                sortList(todaysAppointments);
+                Widget appointmentNo(Appointments a) {
+                  int n;
+                  for (int i = 0; i < docu.length; i++) {
+                    if (a.bookingDate ==
+                        DateTime.parse(docu[i]['BookingTime'])) {
+                      n = docu[i]['Appointment_no'];
+                    }
+                  }
+                  return Text(n.toString());
+                }
+
                 //print(todaysAppointments);
                 return ListView.builder(
                     //shrinkWrap: true,
@@ -219,9 +233,13 @@ class _SearchBarState extends State<SearchBar> {
                       return Card(
                         child: ListTile(
                           title: Text(todaysAppointments[index].email),
-                          subtitle:
+                          subtitle: Column(
+                            children: [
                               Text(todaysAppointments[index].currentUserMail),
-                          trailing: Text((index + 1).toString()),
+                              appointmentNo(todaysAppointments[index]),
+                            ],
+                          ),
+                          //trailing: appointmentNo(todaysAppointments[i]),
                         ),
                       );
                     });
@@ -367,7 +385,9 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                             builder: (context) => DatePick(
                                                 listitem.userName,
                                                 listitem.email,
-                                                currentUserMail)));
+                                                currentUserMail,
+                                                d)));
+                                    d = d + 1;
                                   },
                                   child: Text("Choose Date")),
                             ),

@@ -1,3 +1,5 @@
+import 'package:Appoint_Meet/mainDashboardAppointer.dart';
+
 class Appointments {
   //String userType;
   String userName;
@@ -25,7 +27,7 @@ class Appointments {
 }
 
 List<Appointments> appointmentsList = [];
-List<Appointments> todaysAppointments = [];
+List<Appointments> doctorsAppointments = [];
 void deleteDublicateAppointment() {
   int m = appointmentsList.length;
   for (int i = 0; i < m; i++) {
@@ -39,13 +41,13 @@ void deleteDublicateAppointment() {
   }
 }
 
-void deleteDublicateTodaysAppointment() {
-  int m = todaysAppointments.length;
+void deleteDublicateTodaysAppointment(List<Appointments> c) {
+  int m = c.length;
   for (int i = 0; i < m; i++) {
-    DateTime n = todaysAppointments[i].bookingDate;
+    DateTime n = c[i].bookingDate;
     for (int j = i + 1; j < m; j++) {
-      if (n == todaysAppointments[j].bookingDate) {
-        todaysAppointments.removeAt(j);
+      if (n == c[j].bookingDate) {
+        c.removeAt(j);
         m--;
       }
     }
@@ -61,8 +63,8 @@ void sortDate() {
   });
 }
 
-void sortList() {
-  todaysAppointments.sort((a, b) {
+void sortList(List<Appointments> c) {
+  c.sort((a, b) {
     if (a.bookedDate.compareTo(b.bookedDate) == 0) {
       return a.bookingDate.compareTo(b.bookingDate);
     }

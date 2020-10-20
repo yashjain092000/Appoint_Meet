@@ -312,7 +312,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                                               .toString());
                                     }, onConfirm: (date) {
                                       _morTime1 =
-                                          DateFormat("HH:mm a").format(date);
+                                          DateFormat("yyyy-MM-dd HH:mm:ss")
+                                              .format(date);
                                       print(_morTime1);
                                       // _morTime1 = date;
                                     }, currentTime: DateTime.now());
@@ -340,7 +341,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                                                 .toString());
                                       }, onConfirm: (date) {
                                         _morTime2 =
-                                            DateFormat("HH:mm a").format(date);
+                                            DateFormat("yyyy-MM-dd HH:mm:ss")
+                                                .format(date);
                                         print(_morTime2);
                                         // _morTime1 = date;
                                       }, currentTime: DateTime.now());
@@ -367,7 +369,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                                                 .toString());
                                       }, onConfirm: (date) {
                                         _eveTime1 =
-                                            DateFormat("HH:mm a").format(date);
+                                            DateFormat("yyyy-MM-dd HH:mm:ss")
+                                                .format(date);
                                         print(_eveTime1);
                                       }, currentTime: DateTime.now());
                                     },
@@ -393,7 +396,8 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
                                                 .toString());
                                       }, onConfirm: (date) {
                                         _eveTime2 =
-                                            DateFormat("HH:mm a").format(date);
+                                            DateFormat("yyyy-MM-dd HH:mm:ss")
+                                                .format(date);
                                         print(_eveTime2);
                                       }, currentTime: DateTime.now());
                                     },

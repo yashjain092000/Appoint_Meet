@@ -79,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
             .document(authResult.user.uid)
             .setData({
           'username': username,
+          'userEmail': email,
           'specialisation': specialisation,
           'phone_no': phn,
           'address': address,
