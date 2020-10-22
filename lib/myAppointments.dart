@@ -52,7 +52,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   }
                 }
               }
-              deleteDublicateAppointment();
+              deleteDublicateAppointment(appointmentsList);
               sortDate();
               //sortList();
               return ListView.builder(

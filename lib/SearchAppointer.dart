@@ -168,7 +168,7 @@ class _SearchBarState extends State<SearchBar> {
                           elevation: 10.0,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Text("11",
+                            child: Text(todaysAppointments.length.toString(),
                                 style: TextStyle(
                                     fontSize: 25, color: Colors.white)),
                           ),
@@ -212,7 +212,7 @@ class _SearchBarState extends State<SearchBar> {
                   }
                 }
 
-                deleteDublicateTodaysAppointment(todaysAppointments);
+                deleteDublicateAppointment(todaysAppointments);
                 sortList(todaysAppointments);
                 Widget appointmentNo(Appointments a) {
                   int n;
@@ -251,17 +251,6 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class AppointerNameSearch extends SearchDelegate<Details> {
-  // void addAppointment(String username, String mail,
-  //     String currentUserLoggedInMail, String bookDate, String bookTime) async {
-  //   await Firestore.instance.collection('Appointments').document().setData({
-  //     'username': username,
-  //     'email': mail,
-  //     'currentEmail': currentUserLoggedInMail,
-  //     'bookedDate': selectedDate,
-  //     'dateOfBooking': bookTime
-  //   });
-  // }
-
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(

@@ -1,4 +1,4 @@
-import 'package:Appoint_Meet/mainDashboardAppointer.dart';
+//import 'package:Appoint_Meet/mainDashboardAppointer.dart';
 
 class Appointments {
   //String userType;
@@ -27,21 +27,8 @@ class Appointments {
 }
 
 List<Appointments> appointmentsList = [];
-List<Appointments> doctorsAppointments = [];
-void deleteDublicateAppointment() {
-  int m = appointmentsList.length;
-  for (int i = 0; i < m; i++) {
-    DateTime n = appointmentsList[i].bookingDate;
-    for (int j = i + 1; j < m; j++) {
-      if (n == appointmentsList[j].bookingDate) {
-        appointmentsList.removeAt(j);
-        m--;
-      }
-    }
-  }
-}
-
-void deleteDublicateTodaysAppointment(List<Appointments> c) {
+//List<Appointments> doctorsAppointments = [];
+void deleteDublicateAppointment(List<Appointments> c) {
   int m = c.length;
   for (int i = 0; i < m; i++) {
     DateTime n = c[i].bookingDate;

@@ -22,7 +22,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
         ),
-        MainDashboardAppointer()));
+        MainDash()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
