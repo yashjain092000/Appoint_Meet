@@ -76,7 +76,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     if ((patTime * m) < 60) {
       n = morningTime.toString() + ":" + (patTime * m).toString();
     } else if ((patTime * m) >= 60) {
-      n = (morningTime + 1).toString() + ":" + (patTime * g).toString();
+      n = (morningTime + 1).toString() + ":" + (patTime * g).toString() + " am";
     }
     return n;
   }
@@ -87,7 +87,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     if ((patTime * m) < 60) {
       n = eveningTime.toString() + ":" + (patTime * m).toString();
     } else if ((patTime * m) >= 60) {
-      n = (eveningTime + 1).toString() + ":" + (patTime * g).toString();
+      n = (eveningTime + 1).toString() + ":" + (patTime * g).toString() + " pm";
     }
     return n;
   }

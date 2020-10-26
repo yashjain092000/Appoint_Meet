@@ -11,6 +11,7 @@ import 'datePick.dart';
 String currentUserMail;
 DateTime selectedDate;
 int d = 0;
+String time;
 
 class SearchBar extends StatefulWidget {
   @override
@@ -26,6 +27,16 @@ class _SearchBarState extends State<SearchBar> {
       currentUserMail = uemail;
     });
   }
+  /*setAppointmentTime(String pa,String doc) async {
+    await Firestore.instance
+        .collection("Appointments")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      for (int i = 0; i < snapshot.documents.length; i++) {
+        //print(snapshot.documents[i]['userEmail']);
+        if(pa.compareTo(snapshot.documents[i]['userEmail'])==0 && doc.compareTo(snapshot.documents[i]))
+      }
+    });*/
 
   List<Appointments> todaysAppointments = [];
   void initState() {
@@ -130,7 +141,7 @@ class _SearchBarState extends State<SearchBar> {
                           elevation: 10.0,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Text("2:33 pm",
+                            child: Text("10:00 am",
                                 style: TextStyle(
                                     fontSize: 25, color: Colors.white)),
                           ),
