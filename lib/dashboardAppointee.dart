@@ -1,7 +1,8 @@
 import 'package:Appoint_Meet/myAppointments.dart';
+import 'package:Appoint_Meet/updateProfileAppointee.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'UpdateProfileScreen.dart';
+//import 'UpdateProfileScreen.dart';
 import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,7 +40,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
-        UpdateProfileScreen()));
+        UpdateProfileScreenAppointee()));
 
     super.initState();
   }

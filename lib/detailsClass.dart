@@ -2,8 +2,9 @@ class Details {
   String userType;
   String userName;
   String email;
-  //String userId;
-  Details(this.userType, this.userName, this.email);
+  String imageUrl;
+  bool book;
+  Details(this.userType, this.userName, this.email, this.imageUrl, this.book);
 
   String get userEmail => email;
 
@@ -27,6 +28,7 @@ void deleteDublicate() {
     String n = detailList[i].userEmail;
     for (int j = i + 1; j < m; j++) {
       if (n == detailList[j].userEmail) {
+        detailList[i].book = detailList[j].book;
         detailList.removeAt(j);
         m--;
       }

@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AppointmentsScreen extends StatefulWidget {
+class PreviousAppointmentsScreen extends StatefulWidget {
   @override
-  _AppointmentsScreenState createState() => _AppointmentsScreenState();
+  _PreviousAppointmentsScreenState createState() =>
+      _PreviousAppointmentsScreenState();
 }
 
-class _AppointmentsScreenState extends State<AppointmentsScreen> {
+class _PreviousAppointmentsScreenState
+    extends State<PreviousAppointmentsScreen> {
   String currentMail;
   final FirebaseAuth auth = FirebaseAuth.instance;
   getCurrentUserMail() async {
@@ -27,7 +29,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     getCurrentUserMail();
   }
 
-  List<Appointments> appointmentsList = [];
+  List<Appointments> previousAppointments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +44,30 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               }
               final documen = streamSnapshot.data.documents;
               for (int i = 0; i < documen.length; i++) {
-                if (documen[i]['currentEmail'] == currentMail) {
+                if (documen[i]['email'] == currentMail) {
                   if (DateTime.parse(documen[i]['appointmentDate']).day <
                       DateTime.now().day) {
-                    appointmentsList.add(new Appointments(
+                    previousAppointments.add(new Appointments(
                         documen[i]['username'],
                         documen[i]['email'],
-                        currentMail,
+                        documen[i]['currentEmail'],
                         DateTime.parse(documen[i]['appointmentDate']),
                         DateTime.parse(documen[i]['BookingTime']),
                         documen[i]['id'].toString()));
                   }
                 }
               }
-              deleteDublicateAppointment(appointmentsList);
+              deleteDublicateAppointment(previousAppointments);
               //sortDate();
-              sortList(appointmentsList);
+              sortList(previousAppointments);
               return ListView.builder(
-                  itemCount: appointmentsList.length,
+                  itemCount: previousAppointments.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(appointmentsList[index].email),
-                        subtitle: Text(appointmentsList[index].currentUserMail),
+                        title:
+                            Text(previousAppointments[index].currentUserMail),
+                        subtitle: Text(previousAppointments[index].email),
                         trailing: Text((index + 1).toString()),
                       ),
                     );

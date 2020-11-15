@@ -12,6 +12,29 @@ String currentUserMail;
 DateTime selectedDate;
 int d = 0;
 String time;
+/*Widget getAppointerList = StreamBuilder(
+    stream: Firestore.instance.collection('users').snapshots(),
+    builder: (ctx, streamSnapshot) {
+      if (streamSnapshot.connectionState == ConnectionState.waiting) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+      final document = streamSnapshot.data.documents;
+
+      for (int i = 0; i < document.length; i++) {
+        if (document[i]['typeUser'].compareTo("Appointer") == 0) {
+          detailList.add(new Details(
+              document[i]['typeUser'],
+              document[i]['username'],
+              document[i]['email'],
+              document[i]['profile_image'],
+              document[i]['canBook']));
+        }
+      }
+      deleteDublicate();
+      return Text('');
+    });*/
 
 class SearchBar extends StatefulWidget {
   @override
@@ -27,16 +50,6 @@ class _SearchBarState extends State<SearchBar> {
       currentUserMail = uemail;
     });
   }
-  /*setAppointmentTime(String pa,String doc) async {
-    await Firestore.instance
-        .collection("Appointments")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      for (int i = 0; i < snapshot.documents.length; i++) {
-        //print(snapshot.documents[i]['userEmail']);
-        if(pa.compareTo(snapshot.documents[i]['userEmail'])==0 && doc.compareTo(snapshot.documents[i]))
-      }
-    });*/
 
   List<Appointments> todaysAppointments = [];
   void initState() {
@@ -44,7 +57,7 @@ class _SearchBarState extends State<SearchBar> {
     getCurrentUserMail();
   }
 
-  Widget getAppointerList = StreamBuilder(
+  /*Widget getAppointerList = StreamBuilder(
       stream: Firestore.instance.collection('users').snapshots(),
       builder: (ctx, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
@@ -55,63 +68,69 @@ class _SearchBarState extends State<SearchBar> {
         final document = streamSnapshot.data.documents;
 
         for (int i = 0; i < document.length; i++) {
-          detailList.add(new Details(document[i]['typeUser'],
-              document[i]['username'], document[i]['email']));
-        }
-        deleteDublicate();
-
-        return Text('');
-      });
-  /*Widget getAppointmentsList = StreamBuilder(
-      stream: Firestore.instance.collection('Appointments').snapshots(),
-      builder: (ctx, streamSnapshot) {
-        if (streamSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        final docu = streamSnapshot.data.documents;
-
-        for (int i = 0; i < docu.length; i++) {
-          if (docu[i]['currentEmail'] == currentUserMail) {
-            if (DateTime.parse(docu[i]['appointmentDate']).day ==
-                DateTime.now().day) {
-              todaysAppointments.add(new Appointments(
-                  docu[i]['username'],
-                  docu[i]['email'],
-                  currentUserMail,
-                  DateTime.parse(docu[i]['appointmentDate']),
-                  DateTime.parse(docu[i]['BookingTime'])));
-            }
+          if (document[i]['typeUser'].compareTo("Appointer") == 0) {
+            detailList.add(new Details(
+                document[i]['typeUser'],
+                document[i]['username'],
+                document[i]['email'],
+                document[i]['profile_image'],
+                document[i]['canBook']));
           }
         }
-        deleteDublicateTodaysAppointment();
-
+        deleteDublicate();
         return Text('');
       });*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          elevation: 20.0,
-          title: Text('Search Appointers',
-              style:
-                  TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
-          backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: AppointerNameSearch());
-              },
-              icon: Icon(Icons.search, color: Colors.deepPurple),
-            ),
-          ]),
       body: Column(mainAxisSize: MainAxisSize.min, children: [
+        StreamBuilder(
+            stream: Firestore.instance.collection('users').snapshots(),
+            builder: (ctx, streamSnapshot) {
+              if (streamSnapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final document = streamSnapshot.data.documents;
+
+              for (int i = 0; i < document.length; i++) {
+                if (document[i]['typeUser'].compareTo("Appointer") == 0) {
+                  detailList.add(new Details(
+                      document[i]['typeUser'],
+                      document[i]['username'],
+                      document[i]['email'],
+                      document[i]['profile_image'],
+                      document[i]['canBook']));
+                }
+              }
+              deleteDublicate();
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              );
+            }),
+        AppBar(
+            elevation: 20.0,
+            title: Text('Search Appointers',
+                style:
+                    TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
+            backgroundColor: Colors.white,
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {
+                  showSearch(context: context, delegate: AppointerNameSearch());
+                },
+                icon: Icon(Icons.search, color: Colors.deepPurple),
+              ),
+            ]),
         SizedBox(
-          height: 30,
+          height: MediaQuery.of(context).size.height * 0.03,
         ),
         CarouselPage(),
-        getAppointerList,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.03,
+        ),
+        //getAppointerList,
         //getAppointmentsList,
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,17 +143,20 @@ class _SearchBarState extends State<SearchBar> {
                   shadowColor: Colors.deepPurple[400],
                   elevation: 10.0,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(14.0),
+                        padding: const EdgeInsets.all(7.0),
                         child: Text(
                           "Upcoming Appointment at",
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700),
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.035,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: 7.0),
                         child: Card(
                           color: Colors.deepPurple,
                           shadowColor: Colors.deepPurple[400],
@@ -143,15 +165,15 @@ class _SearchBarState extends State<SearchBar> {
                             padding: const EdgeInsets.all(10.0),
                             child: Text("10:00 am",
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white)),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.08,
+                                    color: Colors.white)),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
               ],
             ),
@@ -164,15 +186,17 @@ class _SearchBarState extends State<SearchBar> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(7.0),
                         child: Text(
                           "Total Appointments",
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700),
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.035,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
+                        padding: const EdgeInsets.only(bottom: 7.0),
                         child: Card(
                           color: Colors.deepPurple,
                           shadowColor: Colors.deepPurple[400],
@@ -181,22 +205,22 @@ class _SearchBarState extends State<SearchBar> {
                             padding: const EdgeInsets.all(10.0),
                             child: Text(todaysAppointments.length.toString(),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white)),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.08,
+                                    color: Colors.white)),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
               ],
             ),
           ],
         ),
         SizedBox(
-          height: 10,
+          height: MediaQuery.of(context).size.height * 0.03,
         ),
         Expanded(
           child: StreamBuilder(
@@ -218,7 +242,8 @@ class _SearchBarState extends State<SearchBar> {
                           docu[i]['email'],
                           currentUserMail,
                           DateTime.parse(docu[i]['appointmentDate']),
-                          DateTime.parse(docu[i]['BookingTime'])));
+                          DateTime.parse(docu[i]['BookingTime']),
+                          docu[i]['id'].toString()));
                     }
                   }
                 }
@@ -287,6 +312,7 @@ class AppointerNameSearch extends SearchDelegate<Details> {
 
   @override
   Widget buildResults(BuildContext context) {
+    //Widget a = getAppointerList;
     return SearchBar();
   }
 
@@ -309,111 +335,124 @@ class AppointerNameSearch extends SearchDelegate<Details> {
             itemBuilder: (context, index) {
               final Details listitem = mylist[index];
               return InkWell(
-                child: Card(
-                  color: Colors.white10,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        padding: EdgeInsets.all(10.0),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage('images/logopng.png'),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          child: Text(
-                            listitem.userName,
-                            style: TextStyle(fontSize: 20),
+                  child: Card(
+                    color: Colors.white10,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          padding: EdgeInsets.all(10.0),
+                          child: CircleAvatar(
+                            backgroundImage:
+                                listitem.imageUrl.compareTo(" ") == 0
+                                    ? AssetImage('images/logopng.png')
+                                    : NetworkImage(listitem.imageUrl),
                           ),
-                          shadowColor: Colors.purple,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          child: Text(listitem.email,
-                              style: TextStyle(fontSize: 20)),
-                          shadowColor: Colors.purple,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Card(
+                            child: Text(
+                              listitem.userName,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            shadowColor: Colors.purple,
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Card(
+                            child: Text(listitem.email,
+                                style: TextStyle(fontSize: 20)),
+                            shadowColor: Colors.purple,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (_) {
-                        return Column(
-                          children: [
-                            Container(
-                              height: 200,
-                              width: 200,
-                              padding: EdgeInsets.all(10.0),
-                              child: CircleAvatar(
-                                // backgroundImage:
-                                //AssetImage('images/logopng.png'),
-                                backgroundColor: Colors.deepPurple,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
-                                child: Text(
-                                  listitem.userName,
-                                  style: TextStyle(fontSize: 30),
-                                ),
-                                shadowColor: Colors.deepPurple,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
-                                child: Text(listitem.email,
-                                    style: TextStyle(fontSize: 30)),
-                                shadowColor: Colors.deepPurple,
-                              ),
-                            ),
-                            Card(
-                              child: FlatButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DatePick(
-                                                listitem.userName,
-                                                listitem.email,
-                                                currentUserMail,
-                                                d)));
-                                    d = d + 1;
-                                  },
-                                  child: Text("Choose Date")),
-                            ),
-                            // Card(
-                            //   child: FlatButton(
-                            //       onPressed: () {
-                            //         print(currentUserMail);
-                            //         print(selectedDate);
-                            //         addAppointment(
-                            //           listitem.userName,
-                            //           listitem.email,
-                            //           currentUserMail,
-                            //           DateFormat("yyyy-MM-dd HH:mm:ss")
-                            //               .format(selectedDate),
-                            //           DateFormat("yyyy-MM-dd HH:mm:ss")
-                            //               .format(DateTime.now()),
-                            //         );
-                            //         Navigator.of(context).pop();
-                            //       },
-                            //       child: Text("Book")),
-                            // )
-                          ],
-                        );
-                      });
-                },
-              );
+                  onTap: listitem.book == true
+                      ? () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (_) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      width: 200,
+                                      padding: EdgeInsets.all(10.0),
+                                      child: CircleAvatar(
+                                        backgroundImage: listitem.imageUrl
+                                                    .compareTo(" ") ==
+                                                0
+                                            ? AssetImage('images/logopng.png')
+                                            : NetworkImage(listitem.imageUrl),
+                                        //AssetImage('images/logopng.png'),
+                                        //backgroundColor: Colors.deepPurple,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Card(
+                                        child: Text(
+                                          listitem.userName,
+                                          style: TextStyle(fontSize: 30),
+                                        ),
+                                        shadowColor: Colors.deepPurple,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Card(
+                                        child: Text(listitem.email,
+                                            style: TextStyle(fontSize: 30)),
+                                        shadowColor: Colors.deepPurple,
+                                      ),
+                                    ),
+
+                                    Card(
+                                      child: FlatButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DatePick(
+                                                            listitem.userName,
+                                                            listitem.email,
+                                                            currentUserMail,
+                                                            d)));
+                                            d = d + 1;
+                                          },
+                                          child: Text("Choose Date")),
+                                    ),
+                                    // Card(
+                                    //   child: FlatButton(
+                                    //       onPressed: () {
+                                    //         print(currentUserMail);
+                                    //         print(selectedDate);
+                                    //         addAppointment(
+                                    //           listitem.userName,
+                                    //           listitem.email,
+                                    //           currentUserMail,
+                                    //           DateFormat("yyyy-MM-dd HH:mm:ss")
+                                    //               .format(selectedDate),
+                                    //           DateFormat("yyyy-MM-dd HH:mm:ss")
+                                    //               .format(DateTime.now()),
+                                    //         );
+                                    //         Navigator.of(context).pop();
+                                    //       },
+                                    //       child: Text("Book")),
+                                    // )
+                                  ],
+                                );
+                              });
+                        }
+                      : () {
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text("not available")));
+                        });
             });
   }
 }

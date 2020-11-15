@@ -55,14 +55,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     angle: animation.value * 6.3,
                     child: Image(
                       image: AssetImage('images/logopng.png'),
-                      height: 100,
+                      height: MediaQuery.of(context).size.height * 0.13,
                     ),
                   ),
                 ),
                 Text(
                   "APPOINT",
                   style: TextStyle(
-                    fontSize: 32.0,
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -85,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ],
                   // alignment: Alignment(1.0, 0.5),
                   textStyle: TextStyle(
-                    fontSize: 32.0,
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -101,45 +101,46 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Column(
                   children: <Widget>[
                     Row(children: <Widget>[
-                      SizedBox(height: 70),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.1),
                       Text(
                         "One place where you can ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 26.0,
+                          fontSize: MediaQuery.of(context).size.width * 0.06,
                           fontWeight: FontWeight.w500,
                         ),
                       )
                     ]),
-                    SizedBox(height: 30),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                     Row(children: <Widget>[
                       Text(
                         "Book your appointments",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: MediaQuery.of(context).size.width * 0.06,
                           fontWeight: FontWeight.w300,
                         ),
                       )
                     ]),
-                    SizedBox(height: 14),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     Row(children: <Widget>[
                       Text(
                         "Manage your appointments",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: MediaQuery.of(context).size.width * 0.06,
                           fontWeight: FontWeight.w300,
                         ),
                       )
                     ]),
-                    SizedBox(height: 14),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     Row(children: <Widget>[
                       Text(
                         "Get your appointments booked",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: MediaQuery.of(context).size.width * 0.06,
                           fontWeight: FontWeight.w300,
                         ),
                       )

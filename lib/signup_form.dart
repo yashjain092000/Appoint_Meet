@@ -2,6 +2,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+//import 'picker/user_image_picker.dart';
+//import 'dart:io';
+//import 'package:image_picker/image_picker.dart';
 
 List<DropdownMenuItem<String>> _dropDownItem() {
   List<String> ddl = ["Male", 'Female', 'Other'];
@@ -94,26 +97,27 @@ class _AuthFormAppointerState extends State<AuthFormAppointer> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 60.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           TypewriterAnimatedTextKit(
               speed: Duration(milliseconds: 300),
               totalRepeatCount: 0,
               text: ["Welcome!"],
               textStyle: TextStyle(
-                  fontSize: 30,
+                  fontSize: MediaQuery.of(context).size.width * 0.1,
                   fontFamily: "Agne",
                   fontWeight: FontWeight.w500),
               textAlign: TextAlign.start,
               alignment: AlignmentDirectional.topStart),
-          SizedBox(height: 60.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.07),
           Center(
             child: Card(
               shadowColor: Colors.deepPurple,
-              elevation: 20.0,
-              margin: EdgeInsets.all(20),
+              elevation: MediaQuery.of(context).size.height * 0.04,
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
                   child: Form(
                     key: _formKey,
                     child: Column(

@@ -1,4 +1,5 @@
 import 'package:Appoint_Meet/mainDashboardAppointer.dart';
+import 'package:Appoint_Meet/previousAppointments.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'UpdateProfileScreen.dart';
@@ -17,7 +18,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
   void initState() {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Screen 1 Appointer",
+          name: "DashBoard",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
@@ -26,7 +27,16 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Screen 2 Appointer",
+          name: "Past Appointments",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.teal,
+        ),
+        PreviousAppointmentsScreen()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Update Profile",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.orange,

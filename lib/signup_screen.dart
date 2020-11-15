@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'signup_form.dart';
+//import 'dart:io';
+//import 'package:firebase_storage/firebase_storage.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -32,7 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
     BuildContext ctx,
   ) async {
     AuthResult authResult;
-
+    //final ref = FirebaseStorage.instance.ref();
     try {
       setState(() {
         _isLoading = true;
@@ -43,18 +45,21 @@ class _SignupScreenState extends State<SignupScreen> {
           email: email,
           password: password,
         );
+
         await Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
             .setData({
           'username': username,
           'email': email,
-          'typeUser': 'Appointee'
+          'typeUser': 'Appointee',
+          'profile_image': " "
         });
         await Firestore.instance
             .collection('Appointees')
             .document(authResult.user.uid)
             .setData({
+          'userEmail': email,
           'username': username,
           'age': age,
           'phone no.': phn,
@@ -66,18 +71,22 @@ class _SignupScreenState extends State<SignupScreen> {
           email: email,
           password: password,
         );
+
         await Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
             .setData({
+          'canBook': true,
           'username': username,
           'email': email,
-          'typeUser': 'Appointer'
+          'typeUser': 'Appointer',
+          'profile_image': " ",
         });
         await Firestore.instance
             .collection('Appointers')
             .document(authResult.user.uid)
             .setData({
+          'canBook': true,
           'username': username,
           'userEmail': email,
           'specialisation': specialisation,

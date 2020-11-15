@@ -1,4 +1,5 @@
 //import 'package:Appoint_Meet/SearchAppointer.dart';
+import 'package:Appoint_Meet/picker/prescription.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'appointmentsClass.dart';
@@ -21,6 +22,7 @@ class MainDashboardAppointer extends StatefulWidget {
 
 class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  String _id = "";
   getCurrentDoctorsMail() async {
     final FirebaseUser user = await auth.currentUser();
     final uemail = user.email;
@@ -28,6 +30,22 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
       currentDoctorsMail = uemail;
     });
     print(currentDoctorsMail);
+  }
+
+  userDocumentIdAppointer() async {
+    await Firestore.instance
+        .collection("users")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      for (int i = 0; i < snapshot.documents.length; i++) {
+        if (snapshot.documents[i]['email'].compareTo(currentDoctorsMail) == 0) {
+          snapshot.documents[i].documentID;
+          setState(() {
+            _id = snapshot.documents[i].documentID;
+          });
+        }
+      }
+    });
   }
 
   List<TimeTable> doctorsTimeTable = [];
@@ -104,6 +122,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     super.initState();
     getCurrentDoctorsMail();
     timeTable();
+    userDocumentIdAppointer();
     //getTime();
   }
 
@@ -204,6 +223,48 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         SizedBox(
           height: 10,
         ),
+        Row(
+          children: [
+            Card(
+              color: Colors.deepPurple,
+              child: FlatButton(
+                //color: Colors.blue,
+                onPressed: () {
+                  Firestore.instance
+                      .collection("users")
+                      .document(_id)
+                      .updateData({'canBook': false});
+                },
+                child: Card(
+                  color: Colors.deepPurple,
+                  child: Text(
+                    "Stop Appointments",
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.deepPurple,
+              child: FlatButton(
+                //color: Colors.blue,
+                onPressed: () {
+                  Firestore.instance
+                      .collection("users")
+                      .document(_id)
+                      .updateData({'canBook': true});
+                },
+                child: Card(
+                  color: Colors.deepPurple,
+                  child: Text(
+                    "Start Appointments",
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
         Expanded(
           child: StreamBuilder(
               stream: Firestore.instance.collection('Appointments').snapshots(),
@@ -223,10 +284,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                           docu[i]['currentEmail'],
                           currentDoctorsMail,
                           DateTime.parse(docu[i]['appointmentDate']),
-                          DateTime.parse(docu[i]['BookingTime'])));
+                          DateTime.parse(docu[i]['BookingTime']),
+                          docu[i]['id'].toString()));
                     }
                   }
                 }
+
                 deleteDublicateAppointment(docAppointments);
                 sortList(docAppointments);
                 //docu.orderBy()
@@ -249,18 +312,28 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     itemCount: docAppointments.length,
                     itemBuilder: (context, index) {
                       return Card(
-                        child: ListTile(
-                          title: Text(docAppointments[index].email),
-                          subtitle:
-                              Text(docAppointments[index].currentUserMail),
-                          trailing: Column(
-                            children: [
-                              Text((index + 1).toString()),
-                              Text(time(index + 1, index)),
-                            ],
-                          ),
+                          child: ListTile(
+                        title: Text((index + 1).toString() +
+                            " " +
+                            docAppointments[index].email),
+                        subtitle: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(docAppointments[index].currentUserMail),
+                            Text(time(index + 1, index)),
+                            PrescriptionPicker(
+                                docAppointments[index].bookingDate.toString(),
+                                docAppointments[index].id)
+                          ],
                         ),
-                      );
+                        trailing: IconButton(
+                            //color: Colors.red,
+                            icon: Icon(Icons.delete),
+                            onPressed: () => Firestore.instance
+                                .collection("Appointments")
+                                .document((docu[index]['id'].toString()))
+                                .delete()),
+                      ));
                     });
               }),
         ),
