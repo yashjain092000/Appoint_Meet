@@ -27,8 +27,6 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     getCurrentUserMail();
   }
 
-  List<Appointments> appointmentsList = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +39,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
+              List<Appointments> appointmentsList = [];
+
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['currentEmail'] == currentMail) {
                   if (DateTime.parse(documen[i]['appointmentDate']).day <
@@ -55,7 +55,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   }
                 }
               }
-              deleteDublicateAppointment(appointmentsList);
+              //deleteDublicateAppointment(appointmentsList);
               //sortDate();
               sortList(appointmentsList);
               return ListView.builder(

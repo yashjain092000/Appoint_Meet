@@ -29,8 +29,6 @@ class _PreviousAppointmentsScreenState
     getCurrentUserMail();
   }
 
-  List<Appointments> previousAppointments = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +41,7 @@ class _PreviousAppointmentsScreenState
                 );
               }
               final documen = streamSnapshot.data.documents;
+              List<Appointments> previousAppointments = [];
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['email'] == currentMail) {
                   if (DateTime.parse(documen[i]['appointmentDate']).day <
@@ -57,7 +56,7 @@ class _PreviousAppointmentsScreenState
                   }
                 }
               }
-              deleteDublicateAppointment(previousAppointments);
+              //deleteDublicateAppointment(previousAppointments);
               //sortDate();
               sortList(previousAppointments);
               return ListView.builder(

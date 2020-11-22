@@ -92,7 +92,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     int g = m % 6;
 
     if ((patTime * m) < 60) {
-      n = morningTime.toString() + ":" + (patTime * m).toString();
+      n = morningTime.toString() + ":" + (patTime * m).toString() + " am";
     } else if ((patTime * m) >= 60) {
       n = (morningTime + 1).toString() + ":" + (patTime * g).toString() + " am";
     }
@@ -103,7 +103,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     String n;
     int g = m % 6;
     if ((patTime * m) < 60) {
-      n = eveningTime.toString() + ":" + (patTime * m).toString();
+      n = eveningTime.toString() + ":" + (patTime * m).toString() + " pm";
     } else if ((patTime * m) >= 60) {
       n = (eveningTime + 1).toString() + ":" + (patTime * g).toString() + " pm";
     }
@@ -313,27 +313,40 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     itemBuilder: (context, index) {
                       return Card(
                           child: ListTile(
-                        title: Text((index + 1).toString() +
-                            " " +
-                            docAppointments[index].email),
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(docAppointments[index].currentUserMail),
-                            Text(time(index + 1, index)),
-                            PrescriptionPicker(
-                                docAppointments[index].bookingDate.toString(),
-                                docAppointments[index].id)
-                          ],
-                        ),
-                        trailing: IconButton(
-                            //color: Colors.red,
-                            icon: Icon(Icons.delete),
-                            onPressed: () => Firestore.instance
-                                .collection("Appointments")
-                                .document((docu[index]['id'].toString()))
-                                .delete()),
-                      ));
+                              title: Text((index + 1).toString() +
+                                  " " +
+                                  docAppointments[index].email),
+                              subtitle: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(docAppointments[index].currentUserMail),
+                                  Text(time(index + 1, index)),
+                                  PrescriptionPicker(
+                                      docAppointments[index]
+                                          .bookingDate
+                                          .toString(),
+                                      docAppointments[index].id)
+                                ],
+                              ),
+                              trailing: IconButton(
+                                  //color: Colors.red,
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    Firestore.instance
+                                        .collection("Appointments")
+                                        .document(docAppointments[index].id)
+                                        .delete();
+                                    Firestore.instance
+                                        .collection("Notification")
+                                        .document()
+                                        .setData({
+                                      "message": "your appointment with " +
+                                          currentDoctorsMail +
+                                          " is cancelled",
+                                      "mail": docAppointments[index].email,
+                                    });
+                                    docAppointments.removeAt(index);
+                                  })));
                     });
               }),
         ),

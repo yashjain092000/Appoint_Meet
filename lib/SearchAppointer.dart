@@ -12,6 +12,7 @@ String currentUserMail;
 DateTime selectedDate;
 int d = 0;
 String time;
+String t = " ";
 /*Widget getAppointerList = StreamBuilder(
     stream: Firestore.instance.collection('users').snapshots(),
     builder: (ctx, streamSnapshot) {
@@ -57,29 +58,8 @@ class _SearchBarState extends State<SearchBar> {
     getCurrentUserMail();
   }
 
-  /*Widget getAppointerList = StreamBuilder(
-      stream: Firestore.instance.collection('users').snapshots(),
-      builder: (ctx, streamSnapshot) {
-        if (streamSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        final document = streamSnapshot.data.documents;
+  int len = 0;
 
-        for (int i = 0; i < document.length; i++) {
-          if (document[i]['typeUser'].compareTo("Appointer") == 0) {
-            detailList.add(new Details(
-                document[i]['typeUser'],
-                document[i]['username'],
-                document[i]['email'],
-                document[i]['profile_image'],
-                document[i]['canBook']));
-          }
-        }
-        deleteDublicate();
-        return Text('');
-      });*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,7 +143,7 @@ class _SearchBarState extends State<SearchBar> {
                           elevation: 10.0,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Text("10:00 am",
+                            child: Text(t,
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width *
@@ -340,16 +320,17 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                     child: Column(
                       children: [
                         Container(
-                          height: 100,
-                          width: 100,
-                          padding: EdgeInsets.all(10.0),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                listitem.imageUrl.compareTo(" ") == 0
-                                    ? AssetImage('images/logopng.png')
-                                    : NetworkImage(listitem.imageUrl),
-                          ),
-                        ),
+                            height: 100,
+                            width: 100,
+                            padding: EdgeInsets.all(10.0),
+                            child: listitem.imageUrl.compareTo(" ") == 0
+                                ? CircleAvatar(
+                                    child: Icon(Icons.portrait),
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(listitem.imageUrl),
+                                  )),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Card(

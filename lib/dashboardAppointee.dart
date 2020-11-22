@@ -1,4 +1,5 @@
 import 'package:Appoint_Meet/myAppointments.dart';
+import 'package:Appoint_Meet/notification.dart';
 import 'package:Appoint_Meet/updateProfileAppointee.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
@@ -41,7 +42,14 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
           colorLineSelected: Colors.white,
         ),
         UpdateProfileScreenAppointee()));
-
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Notifications",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.white,
+        ),
+        NotificationScreen()));
     super.initState();
   }
 
