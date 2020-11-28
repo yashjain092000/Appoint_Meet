@@ -96,8 +96,6 @@ class _DatePickState extends State<DatePick> {
               color: Colors.deepPurple,
               onPressed: () {
                 selectDate(context);
-                Toast.show("$selectedDate selected", context,
-                    duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
               },
               child: Text(
                 'Select date',

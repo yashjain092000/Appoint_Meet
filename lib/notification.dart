@@ -8,7 +8,7 @@ int newCount = 0;
 
 class Count {
   int getCount() {
-    return newCount - oldCount;
+    return newCount;
   }
 
   void zeroCount() {

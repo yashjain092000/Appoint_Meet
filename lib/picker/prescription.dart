@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:toast/toast.dart';
 
 class PrescriptionPicker extends StatefulWidget {
   PrescriptionPicker(this.date, this.id);
@@ -44,6 +45,9 @@ class _PrescriptionPickerState extends State<PrescriptionPicker> {
         .collection("Appointments")
         .document(widget.id)
         .updateData({"Appointment_prescription": profileImageUrl});
+
+    Toast.show("Prescription uploaded!!", context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -59,21 +63,31 @@ class _PrescriptionPickerState extends State<PrescriptionPicker> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundImage:
-              _pickedImage != null ? FileImage(_pickedImage) : null,
+          backgroundColor: Colors.deepPurple,
+          backgroundImage: _pickedImage != null
+              ? FileImage(_pickedImage)
+              : AssetImage('images/qimg.png'),
         ),
         FlatButton.icon(
             onPressed: _pickImage,
-            icon: Icon(Icons.image),
-            label: Text("Add prescription by camera")),
+            icon: Icon(Icons.camera),
+            label: Text("Add by camera")),
         FlatButton.icon(
             onPressed: _pickImageThroughGallery,
             icon: Icon(Icons.image),
-            label: Text("Add prescription by gallery")),
-        FlatButton(onPressed: _uploadImage, child: Text("Upload Prescription"))
+            label: Text("Add by gallery")),
+        RaisedButton(
+            color: Colors.deepPurple,
+            elevation: 4,
+            onPressed: _uploadImage,
+            child: Text(
+              "Upload Prescription",
+              style: TextStyle(color: Colors.white),
+            ))
       ],
     );
   }
