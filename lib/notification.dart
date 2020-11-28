@@ -42,6 +42,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Notifications"),
+          backgroundColor: Colors.deepPurple,
+          shadowColor: Colors.deepPurple,
+          elevation: 9.0,
+        ),
         body: StreamBuilder(
             stream: Firestore.instance.collection('Notification').snapshots(),
             builder: (ctx, streamSnapshot) {
