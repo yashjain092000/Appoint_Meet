@@ -63,9 +63,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   noti.add(documen[i]['message']);
                 }
               }
-              //deleteDublicateAppointment(previousAppointments);
-              //sortDate();
-              //sortList(previousAppointments);
+              if (noti.length == 0)
+                return Center(
+                    child: Text(
+                  "No Notifications!!",
+                  style: TextStyle(fontSize: 20),
+                ));
               return ListView.builder(
                   itemCount: noti.length,
                   itemBuilder: (context, index) {
