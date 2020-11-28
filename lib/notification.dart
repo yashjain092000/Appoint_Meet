@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+List<String> noti = [];
+int oldCount = 0;
+int newCount = 0;
+
+class Count {
+  int getCount() {
+    return newCount - oldCount;
+  }
+
+  void zeroCount() {
+    newCount = 0;
+  }
+}
+
 class NotificationScreen extends StatefulWidget {
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -21,6 +35,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     super.initState();
     getCurrentUserMail();
+    oldCount = newCount;
+    newCount = noti.length;
   }
 
   @override
@@ -35,7 +51,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
-              List<String> noti = [];
+
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['mail'] == _currentMail) {
                   noti.add(documen[i]['message']);

@@ -13,29 +13,6 @@ DateTime selectedDate;
 int d = 0;
 String time;
 String t = " ";
-/*Widget getAppointerList = StreamBuilder(
-    stream: Firestore.instance.collection('users').snapshots(),
-    builder: (ctx, streamSnapshot) {
-      if (streamSnapshot.connectionState == ConnectionState.waiting) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-      final document = streamSnapshot.data.documents;
-
-      for (int i = 0; i < document.length; i++) {
-        if (document[i]['typeUser'].compareTo("Appointer") == 0) {
-          detailList.add(new Details(
-              document[i]['typeUser'],
-              document[i]['username'],
-              document[i]['email'],
-              document[i]['profile_image'],
-              document[i]['canBook']));
-        }
-      }
-      deleteDublicate();
-      return Text('');
-    });*/
 
 class SearchBar extends StatefulWidget {
   @override
@@ -126,30 +103,16 @@ class _SearchBarState extends State<SearchBar> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(7.0),
+                        padding: const EdgeInsets.only(
+                            top: 7.0, left: 7, right: 7, bottom: 3),
                         child: Text(
-                          "Upcoming Appointment at",
+                          "Appointments",
                           style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.035,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 7.0),
-                        child: Card(
-                          color: Colors.deepPurple,
-                          shadowColor: Colors.deepPurple[400],
-                          elevation: 10.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(t,
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.08,
-                                    color: Colors.white)),
-                          ),
+                                  MediaQuery.of(context).size.width * 0.065,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.italic,
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                     ],

@@ -7,6 +7,8 @@ import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:badges/badges.dart';
 
+int notifi = 0;
+
 class DashboardAppointee extends StatefulWidget {
   @override
   _DashboardAppointeeState createState() => _DashboardAppointeeState();
@@ -17,6 +19,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
 
   @override
   void initState() {
+    notifi = Count().getCount();
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Dashboard",
@@ -62,14 +65,15 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
       disableAppBarDefault: false,
       actionsAppBar: <Widget>[
         Badge(
-          position: BadgePosition.topEnd(top: 10, end: 10),
-          badgeContent: Text("2"),
+          position: BadgePosition.topStart(top: 10, start: 10),
+          badgeContent: notifi == 0 ? null : Text("$notifi"),
           child: IconButton(
             icon: Icon(
               Icons.notifications,
               color: Colors.white,
             ),
             onPressed: () {
+              Count().zeroCount();
               Navigator.push(
                   context,
                   MaterialPageRoute(
