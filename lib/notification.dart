@@ -35,21 +35,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
-              List<String> cd = [];
+              List<String> noti = [];
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['mail'] == _currentMail) {
-                  cd.add(documen[i]['message']);
+                  noti.add(documen[i]['message']);
                 }
               }
               //deleteDublicateAppointment(previousAppointments);
               //sortDate();
               //sortList(previousAppointments);
               return ListView.builder(
-                  itemCount: cd.length,
+                  itemCount: noti.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(cd[index]),
+                        title: Text(noti[index]),
                       ),
                     );
                   });

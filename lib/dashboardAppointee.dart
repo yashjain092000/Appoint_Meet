@@ -3,9 +3,9 @@ import 'package:Appoint_Meet/notification.dart';
 import 'package:Appoint_Meet/updateProfileAppointee.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-//import 'UpdateProfileScreen.dart';
 import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:badges/badges.dart';
 
 class DashboardAppointee extends StatefulWidget {
   @override
@@ -61,6 +61,23 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
       backgroundColorAppBar: Colors.deepPurple,
       disableAppBarDefault: false,
       actionsAppBar: <Widget>[
+        Badge(
+          position: BadgePosition.topEnd(top: 10, end: 10),
+          badgeContent: Text("2"),
+          child: IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationScreen(),
+                  ));
+            },
+          ),
+        ),
         DropdownButton(
           icon: Icon(
             Icons.more_vert,
