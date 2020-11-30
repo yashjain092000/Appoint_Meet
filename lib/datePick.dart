@@ -5,6 +5,7 @@ import 'package:toast/toast.dart';
 
 DateTime selectedDate = DateTime.now();
 DateTime checkDate = DateTime.now();
+String url = "";
 String appointerMail = '';
 String appointeeMail = '';
 String userName = '';
@@ -14,8 +15,11 @@ int i;
 
 // ignore: must_be_immutable
 class DatePick extends StatefulWidget {
-  DatePick(String uName, String appointMail, String appointeMail, String imgUrl,
+
+  DatePick(String image, String uName, String appointMail, String appointeMail,
       int j) {
+    url = image;
+
     userName = uName;
     appointerMail = appointMail;
     appointeeMail = appointeMail;

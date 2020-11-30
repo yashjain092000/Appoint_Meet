@@ -35,11 +35,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
 
   userDocumentIdAppointer() async {
     await Firestore.instance
-        .collection("users")
+        .collection("Appointers")
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       for (int i = 0; i < snapshot.documents.length; i++) {
-        if (snapshot.documents[i]['email'].compareTo(currentDoctorsMail) == 0) {
+        if (snapshot.documents[i]['userEmail'].compareTo(currentDoctorsMail) ==
+            0) {
           snapshot.documents[i].documentID;
           setState(() {
             isSwitched = snapshot.documents[i].data['canBook']
@@ -261,7 +262,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                 //color: Colors.blue,
                 onPressed: () {
                   Firestore.instance
-                      .collection("users")
+                      .collection("Appointers")
                       .document(_id)
                       .updateData({'canBook': false});
                 },
@@ -280,7 +281,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                 //color: Colors.blue,
                 onPressed: () {
                   Firestore.instance
-                      .collection("users")
+                      .collection("Appointers")
                       .document(_id)
                       .updateData({'canBook': true});
                 },
@@ -384,6 +385,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                                           currentDoctorsMail +
                                           " is cancelled",
                                       "mail": docAppointments[index].email,
+                                      "date": DateTime.now().toString(),
                                     });
                                     docAppointments.removeAt(index);
 
