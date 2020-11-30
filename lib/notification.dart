@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+List<String> noti = [];
+int oldCount = 0;
+int newCount = 0;
+
+class Count {
+  int getCount() {
+    return newCount;
+  }
+
+  void zeroCount() {
+    newCount = 0;
+  }
+}
+
 class NotificationScreen extends StatefulWidget {
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -21,11 +35,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     super.initState();
     getCurrentUserMail();
+    oldCount = newCount;
+    newCount = noti.length;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Notifications"),
+          backgroundColor: Colors.deepPurple,
+          shadowColor: Colors.deepPurple,
+          elevation: 9.0,
+        ),
         body: StreamBuilder(
             stream: Firestore.instance.collection('Notification').snapshots(),
             builder: (ctx, streamSnapshot) {
@@ -35,24 +57,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
-              List<String> cd = [];
+
               for (int i = 0; i < documen.length; i++) {
+
                 if (documen[i]['mail'] == _currentMail &&
                     (DateTime.now().day + DateTime.now().month) ==
                         (DateTime.parse(documen[i]['date']).day +
                             DateTime.parse(documen[i]['date']).month)) {
                   cd.add(documen[i]['message']);
+
+            
                 }
               }
-              //deleteDublicateAppointment(previousAppointments);
-              //sortDate();
-              //sortList(previousAppointments);
+              if (noti.length == 0)
+                return Center(
+                    child: Text(
+                  "No Notifications!!",
+                  style: TextStyle(fontSize: 20),
+                ));
               return ListView.builder(
-                  itemCount: cd.length,
+                  itemCount: noti.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(cd[index]),
+                        title: Text(noti[index]),
                       ),
                     );
                   });

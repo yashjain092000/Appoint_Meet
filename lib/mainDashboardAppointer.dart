@@ -1,4 +1,3 @@
-//import 'package:Appoint_Meet/SearchAppointer.dart';
 import 'package:Appoint_Meet/picker/prescription.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
@@ -6,7 +5,9 @@ import 'appointmentsClass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'morningEveningTime.dart';
-//import 'timeTable.dart';
+import 'package:toast/toast.dart';
+
+bool isSwitched=true;
 
 String currentDoctorsMail;
 int morningTime = 0;
@@ -42,6 +43,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
             0) {
           snapshot.documents[i].documentID;
           setState(() {
+            isSwitched = snapshot.documents[i].data['canBook']
+                        .toString()
+                        .compareTo("true") ==
+                    0
+                ? true
+                : false;
             _id = snapshot.documents[i].documentID;
           });
         }
@@ -56,7 +63,6 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       for (int i = 0; i < snapshot.documents.length; i++) {
-        //print(snapshot.documents[i]['userEmail']);
         doctorsTimeTable.add(TimeTable(
             snapshot.documents[i]['userEmail'],
             DateTime.parse(snapshot.documents[i]['morning_start_time']),
@@ -124,7 +130,11 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     getCurrentDoctorsMail();
     timeTable();
     userDocumentIdAppointer();
+    print("init " + "$isSwitched");
     //getTime();
+    // Firestore.instance.collection("users").document(_id).get().then((value) {
+    //   isSwitched = value.data['canBook'].toString() == 'true' ? true : false;
+    // });
   }
 
   @override
@@ -132,8 +142,37 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     //timeTable();
     //deleteDuplicateDoctor(doctorsTimeTable);
     //getTotalAppointments();
+
     return Scaffold(
       body: Column(mainAxisSize: MainAxisSize.min, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text("Holiday Mode",
+                style: TextStyle(fontSize: 28, color: Colors.deepPurple)),
+            Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                  print(isSwitched);
+                  isSwitched
+                      ? Firestore.instance
+                          .collection("users")
+                          .document(_id)
+                          .updateData({'canBook': false})
+                      : Firestore.instance
+                          .collection("users")
+                          .document(_id)
+                          .updateData({'canBook': true});
+                });
+              },
+              activeTrackColor: Colors.deepPurpleAccent,
+              activeColor: Colors.red,
+            ),
+          ],
+        ),
+        Divider(thickness: 0.4, color: Colors.deepPurple),
         SizedBox(
           height: 10,
         ),
@@ -152,25 +191,16 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(14.0),
+                        padding: const EdgeInsets.only(
+                            top: 7.0, left: 7, right: 7, bottom: 3),
                         child: Text(
-                          "Upcoming Appointment at",
+                          "Your Appointments",
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
-                        child: Card(
-                          color: Colors.deepPurple,
-                          shadowColor: Colors.deepPurple[400],
-                          elevation: 10.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text("2:33 pm",
-                                style: TextStyle(
-                                    fontSize: 25, color: Colors.white)),
-                          ),
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.065,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.italic,
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                     ],
@@ -215,7 +245,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 2,
                 ),
               ],
             ),
@@ -266,6 +296,10 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
             )
           ],
         ),
+        Padding(
+          padding: EdgeInsets.only(left: 10.0, right: 10),
+          child: Divider(thickness: 0.3, color: Colors.deepPurple),
+        ),
         Expanded(
           child: StreamBuilder(
               stream: Firestore.instance.collection('Appointments').snapshots(),
@@ -314,9 +348,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     itemBuilder: (context, index) {
                       return Card(
                           child: ListTile(
-                              title: Text((index + 1).toString() +
-                                  " " +
-                                  docAppointments[index].email),
+                              leading: Text(" " + (index + 1).toString() + " ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      backgroundColor: Colors.deepPurple)),
+                              title: Text(docAppointments[index].email),
                               subtitle: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -330,8 +367,8 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                                 ],
                               ),
                               trailing: IconButton(
-                                  //color: Colors.red,
-                                  icon: Icon(Icons.delete),
+                                  icon: Icon(Icons.delete,
+                                      color: Colors.deepPurple),
                                   onPressed: () {
                                     Firestore.instance
                                         .collection("Appointments")
@@ -341,13 +378,20 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                                         .collection("Notification")
                                         .document()
                                         .setData({
-                                      "message": "your appointment with " +
+                                      "message": "Your appointment" +
+                                          " @ " +
+                                          time(index + 1, index).toString() +
+                                          " with " +
                                           currentDoctorsMail +
                                           " is cancelled",
                                       "mail": docAppointments[index].email,
                                       "date": DateTime.now().toString(),
                                     });
                                     docAppointments.removeAt(index);
+
+                                    Toast.show("Appointment Deleted!!", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM);
                                   })));
                     });
               }),

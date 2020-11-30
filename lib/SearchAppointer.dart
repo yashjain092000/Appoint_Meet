@@ -1,7 +1,5 @@
 import 'package:Appoint_Meet/appointmentsClass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter/services.dart';
-//import 'package:intl/intl.dart';
 import 'detailsClass.dart';
 import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
@@ -16,6 +14,7 @@ String time;
 String t = " ";
 String image = " ";
 List<Details> detailList = [];
+
 
 class SearchBar extends StatefulWidget {
   @override
@@ -125,30 +124,16 @@ class _SearchBarState extends State<SearchBar> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(7.0),
+                        padding: const EdgeInsets.only(
+                            top: 7.0, left: 7, right: 7, bottom: 3),
                         child: Text(
-                          "Upcoming Appointment at",
+                          "Appointments",
                           style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.035,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 7.0),
-                        child: Card(
-                          color: Colors.deepPurple,
-                          shadowColor: Colors.deepPurple[400],
-                          elevation: 10.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(t,
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.08,
-                                    color: Colors.white)),
-                          ),
+                                  MediaQuery.of(context).size.width * 0.065,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.italic,
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                     ],
@@ -198,8 +183,12 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ],
         ),
+        Padding(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          child: Divider(color: Colors.deepPurple, thickness: 0.4),
+        ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.03,
+          height: MediaQuery.of(context).size.height * 0.003,
         ),
         Expanded(
           child: StreamBuilder(
@@ -279,13 +268,18 @@ class _SearchBarState extends State<SearchBar> {
                       return Card(
                         child: ListTile(
                           title: Text(todaysAppointments[index].email),
+                          leading: CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Colors.deepPurple,
+                            backgroundImage: null,
+                          ),
                           subtitle: Column(
                             children: [
                               Text(todaysAppointments[index].currentUserMail),
                               appointmentNoTime(todaysAppointments[index]),
                             ],
                           ),
-                          //trailing: appointmentNo(todaysAppointments[i]),
+                          trailing: appointmentNo(todaysAppointments[index]),
                         ),
                       );
                     });
@@ -356,8 +350,10 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                             child: listitem.imageUrl.compareTo(" ") == 0
                                 ? CircleAvatar(
                                     child: Icon(Icons.portrait),
+                                    backgroundColor: Colors.deepPurple,
                                   )
                                 : CircleAvatar(
+                                    backgroundColor: Colors.deepPurple,
                                     backgroundImage:
                                         NetworkImage(listitem.imageUrl),
                                   )),
@@ -368,7 +364,7 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                               listitem.userName,
                               style: TextStyle(fontSize: 20),
                             ),
-                            shadowColor: Colors.purple,
+                            shadowColor: Colors.deepPurple,
                           ),
                         ),
                         Padding(
@@ -376,7 +372,7 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                           child: Card(
                             child: Text(listitem.email,
                                 style: TextStyle(fontSize: 20)),
-                            shadowColor: Colors.purple,
+                            shadowColor: Colors.deepPurple,
                           ),
                         ),
                       ],
@@ -385,6 +381,8 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                   onTap: listitem.book == true
                       ? () {
                           showModalBottomSheet(
+                              elevation: 50.0,
+                              enableDrag: true,
                               context: context,
                               builder: (_) {
                                 return Column(
@@ -394,13 +392,12 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                       width: 200,
                                       padding: EdgeInsets.all(10.0),
                                       child: CircleAvatar(
+                                        backgroundColor: Colors.deepPurple,
                                         backgroundImage: listitem.imageUrl
                                                     .compareTo(" ") ==
                                                 0
-                                            ? AssetImage('images/logopng.png')
+                                            ? null
                                             : NetworkImage(listitem.imageUrl),
-                                        //AssetImage('images/logopng.png'),
-                                        //backgroundColor: Colors.deepPurple,
                                       ),
                                     ),
                                     Padding(
@@ -421,49 +418,38 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                         shadowColor: Colors.deepPurple,
                                       ),
                                     ),
-
                                     Card(
-                                      child: FlatButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DatePick(
-                                                            listitem.imageUrl,
-                                                            listitem.userName,
-                                                            listitem.email,
-                                                            currentUserMail,
-                                                            d)));
-                                            d = d + 1;
-                                          },
-                                          child: Text("Choose Date")),
+
+                                      child: RaisedButton(
+                                        elevation: 4.0,
+                                        color: Colors.deepPurple,
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DatePick(
+                                                          listitem.userName,
+                                                          listitem.email,
+                                                          currentUserMail,
+                                                          listitem.imageUrl,
+                                                          d)));
+                                          d = d + 1;
+                                        },
+                                        child: Text(
+                                          "Choose Date",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+
                                     ),
-                                    // Card(
-                                    //   child: FlatButton(
-                                    //       onPressed: () {
-                                    //         print(currentUserMail);
-                                    //         print(selectedDate);
-                                    //         addAppointment(
-                                    //           listitem.userName,
-                                    //           listitem.email,
-                                    //           currentUserMail,
-                                    //           DateFormat("yyyy-MM-dd HH:mm:ss")
-                                    //               .format(selectedDate),
-                                    //           DateFormat("yyyy-MM-dd HH:mm:ss")
-                                    //               .format(DateTime.now()),
-                                    //         );
-                                    //         Navigator.of(context).pop();
-                                    //       },
-                                    //       child: Text("Book")),
-                                    // )
                                   ],
                                 );
                               });
                         }
                       : () {
                           Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text("not available")));
+                              SnackBar(content: Text("Not available")));
                         });
             });
   }

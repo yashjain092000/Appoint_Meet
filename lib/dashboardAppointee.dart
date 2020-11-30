@@ -3,9 +3,11 @@ import 'package:Appoint_Meet/notification.dart';
 import 'package:Appoint_Meet/updateProfileAppointee.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-//import 'UpdateProfileScreen.dart';
 import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:badges/badges.dart';
+
+int notifi = 0;
 
 class DashboardAppointee extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
 
   @override
   void initState() {
+    notifi = Count().getCount();
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Dashboard",
@@ -61,6 +64,24 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
       backgroundColorAppBar: Colors.deepPurple,
       disableAppBarDefault: false,
       actionsAppBar: <Widget>[
+        Badge(
+          position: BadgePosition.topStart(top: 10, start: 10),
+          badgeContent: notifi == 0 ? null : Text("$notifi"),
+          child: IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Count().zeroCount();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationScreen(),
+                  ));
+            },
+          ),
+        ),
         DropdownButton(
           icon: Icon(
             Icons.more_vert,

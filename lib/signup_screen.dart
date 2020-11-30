@@ -63,7 +63,8 @@ class _SignupScreenState extends State<SignupScreen> {
           'username': username,
           'age': age,
           'phone no.': phn,
-          'address': address
+          'address': address,
+          'password': password,
         });
       } else {
         print("Appointer's signup");
@@ -99,7 +100,8 @@ class _SignupScreenState extends State<SignupScreen> {
           'morning_end_time': morTime2,
           'evening_start_time': eveTime1,
           'evening_end_time': eveTime2,
-          'patient_time': eachTime
+          'patient_time': eachTime,
+          'password': password,
         });
       }
     } on PlatformException catch (err) {
