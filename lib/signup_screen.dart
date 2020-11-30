@@ -87,6 +87,7 @@ class _SignupScreenState extends State<SignupScreen> {
             .document(authResult.user.uid)
             .setData({
           'canBook': true,
+          'profile_image': " ",
           'username': username,
           'userEmail': email,
           'specialisation': specialisation,

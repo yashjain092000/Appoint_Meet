@@ -37,7 +37,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
               final documen = streamSnapshot.data.documents;
               List<String> cd = [];
               for (int i = 0; i < documen.length; i++) {
-                if (documen[i]['mail'] == _currentMail) {
+                if (documen[i]['mail'] == _currentMail &&
+                    (DateTime.now().day + DateTime.now().month) ==
+                        (DateTime.parse(documen[i]['date']).day +
+                            DateTime.parse(documen[i]['date']).month)) {
                   cd.add(documen[i]['message']);
                 }
               }
