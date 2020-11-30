@@ -1,8 +1,5 @@
 import 'package:Appoint_Meet/appointmentsClass.dart';
-//import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -42,6 +39,7 @@ class _PreviousAppointmentsScreenState
               }
               final documen = streamSnapshot.data.documents;
               List<Appointments> previousAppointments = [];
+
               for (int i = 0; i < documen.length; i++) {
                 if (documen[i]['email'] == currentMail) {
                   if (DateTime.parse(documen[i]['appointmentDate']).day <
@@ -56,9 +54,10 @@ class _PreviousAppointmentsScreenState
                   }
                 }
               }
-              //deleteDublicateAppointment(previousAppointments);
-              //sortDate();
+
               sortList(previousAppointments);
+              if (previousAppointments.length == 0)
+                return Center(child: Text("No Previous Appointments"));
               return ListView.builder(
                   itemCount: previousAppointments.length,
                   itemBuilder: (context, index) {

@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'morningEveningTime.dart';
 import 'package:toast/toast.dart';
 
+bool isSwitched=true;
+
 String currentDoctorsMail;
 int morningTime = 0;
 int eveningTime = 0;
@@ -40,6 +42,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         if (snapshot.documents[i]['email'].compareTo(currentDoctorsMail) == 0) {
           snapshot.documents[i].documentID;
           setState(() {
+            isSwitched = snapshot.documents[i].data['canBook']
+                        .toString()
+                        .compareTo("true") ==
+                    0
+                ? true
+                : false;
             _id = snapshot.documents[i].documentID;
           });
         }
@@ -54,7 +62,6 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       for (int i = 0; i < snapshot.documents.length; i++) {
-        //print(snapshot.documents[i]['userEmail']);
         doctorsTimeTable.add(TimeTable(
             snapshot.documents[i]['userEmail'],
             DateTime.parse(snapshot.documents[i]['morning_start_time']),
@@ -122,7 +129,11 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     getCurrentDoctorsMail();
     timeTable();
     userDocumentIdAppointer();
+    print("init " + "$isSwitched");
     //getTime();
+    // Firestore.instance.collection("users").document(_id).get().then((value) {
+    //   isSwitched = value.data['canBook'].toString() == 'true' ? true : false;
+    // });
   }
 
   @override
@@ -130,8 +141,37 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     //timeTable();
     //deleteDuplicateDoctor(doctorsTimeTable);
     //getTotalAppointments();
+
     return Scaffold(
       body: Column(mainAxisSize: MainAxisSize.min, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text("Holiday Mode",
+                style: TextStyle(fontSize: 28, color: Colors.deepPurple)),
+            Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                  print(isSwitched);
+                  isSwitched
+                      ? Firestore.instance
+                          .collection("users")
+                          .document(_id)
+                          .updateData({'canBook': false})
+                      : Firestore.instance
+                          .collection("users")
+                          .document(_id)
+                          .updateData({'canBook': true});
+                });
+              },
+              activeTrackColor: Colors.deepPurpleAccent,
+              activeColor: Colors.red,
+            ),
+          ],
+        ),
+        Divider(thickness: 0.4, color: Colors.deepPurple),
         SizedBox(
           height: 10,
         ),
@@ -310,7 +350,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                               leading: Text(" " + (index + 1).toString() + " ",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize:20.0,
+                                      fontSize: 20.0,
                                       backgroundColor: Colors.deepPurple)),
                               title: Text(docAppointments[index].email),
                               subtitle: Column(
