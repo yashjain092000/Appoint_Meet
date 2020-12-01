@@ -125,7 +125,7 @@ class _UpdateProfileScreenAppointeeState
           SizedBox(height: 20.0),
           Container(
             padding: EdgeInsets.all(10.0),
-            child: UserImagePicker(currentUserEmail, _id, "Appointee"),
+            child: UserImagePicker(currentUserEmail, _id),
           ),
           Center(
             child: Expanded(

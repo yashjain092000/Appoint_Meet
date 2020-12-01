@@ -68,12 +68,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   userDocumentIdAppointer() async {
     await Firestore.instance
-        .collection("Appointers")
+        .collection("users")
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       for (int i = 0; i < snapshot.documents.length; i++) {
-        if (snapshot.documents[i]['userEmail'].compareTo(currentUserEmail) ==
-            0) {
+        if (snapshot.documents[i]['email'].compareTo(currentUserEmail) == 0) {
           snapshot.documents[i].documentID;
           setState(() {
             _id = snapshot.documents[i].documentID;
@@ -134,7 +133,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           SizedBox(height: 20.0),
           Container(
             padding: EdgeInsets.all(10.0),
-            child: UserImagePicker(currentUserEmail, _id, "Appointer"),
+            child: UserImagePicker(currentUserEmail, _id),
           ),
           Center(
             child: Expanded(

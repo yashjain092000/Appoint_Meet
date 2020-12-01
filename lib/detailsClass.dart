@@ -1,14 +1,10 @@
 class Details {
-  String userSpecialisation;
+  String userType;
   String userName;
   String email;
   String imageUrl;
-  String address;
-  String morningTime;
-  String eveningTime;
   bool book;
-  Details(this.userSpecialisation, this.userName, this.email, this.imageUrl,
-      this.address, this.morningTime, this.eveningTime, this.book);
+  Details(this.userType, this.userName, this.email, this.imageUrl, this.book);
 
   String get userEmail => email;
 
@@ -25,15 +21,15 @@ class Details {
   // }
 }
 
-void deleteDublicate(List<Details> d) {
-  int m = d.length;
+List<Details> detailList = [];
+void deleteDublicate() {
+  int m = detailList.length;
   for (int i = 0; i < m; i++) {
-    String n = d[i].email;
+    String n = detailList[i].userEmail;
     for (int j = i + 1; j < m; j++) {
-      if (n == d[j].email) {
-        d[i].book = d[j].book;
-        d[i].imageUrl = d[j].imageUrl;
-        d.removeAt(j);
+      if (n == detailList[j].userEmail) {
+        detailList[i].book = detailList[j].book;
+        detailList.removeAt(j);
         m--;
       }
     }
