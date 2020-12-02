@@ -55,17 +55,62 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   }
                 }
               }
+
               //deleteDublicateAppointment(appointmentsList);
               //sortDate();
               sortList(appointmentsList);
+              Widget appointmentNoTime(Appointments a) {
+                int n;
+                String g = '';
+                String prescription = " ";
+                for (int i = 0; i < documen.length; i++) {
+                  if (a.bookingDate ==
+                      DateTime.parse(documen[i]['BookingTime'])) {
+                    n = documen[i]['Appointment_no'];
+                    g = documen[i]['Appointment_time'];
+                    prescription = documen[i]['Appointment_prescription'];
+                  }
+                }
+                return Column(
+                  children: [
+                    Text("Appointment no.:" + n.toString() + " Time:" + g),
+                    prescription.compareTo("not uploaded yet") == 0
+                        ? Text(prescription)
+                        : FlatButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) {
+                                    return Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.6,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(prescription),
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Text("Prescription")),
+                  ],
+                );
+              }
+
               return ListView.builder(
                   itemCount: appointmentsList.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
                         title: Text(appointmentsList[index].email),
-                        subtitle: Text(appointmentsList[index].currentUserMail),
-                        trailing: Text((index + 1).toString()),
+                        subtitle: Column(
+                          children: [
+                            Text(appointmentsList[index].currentUserMail),
+                            appointmentNoTime(appointmentsList[index]),
+                          ],
+                        ),
                       ),
                     );
                   });

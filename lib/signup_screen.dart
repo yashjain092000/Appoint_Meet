@@ -88,6 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
             .document(authResult.user.uid)
             .setData({
           'canBook': true,
+          'profile_image': " ",
           'username': username,
           'userEmail': email,
           'specialisation': specialisation,
@@ -99,8 +100,7 @@ class _SignupScreenState extends State<SignupScreen> {
           'morning_end_time': morTime2,
           'evening_start_time': eveTime1,
           'evening_end_time': eveTime2,
-          'patient_time': eachTime,
-          'password': password,
+          'patient_time': eachTime
         });
       }
     } on PlatformException catch (err) {
