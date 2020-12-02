@@ -110,7 +110,10 @@ class _AuthFormState extends State<AuthForm> {
                           },
                         ),
                         SizedBox(height: 12),
-                        if (widget.isLoading) CircularProgressIndicator(),
+                        if (widget.isLoading)
+                          CircularProgressIndicator(
+                            backgroundColor: Colors.deepPurple,
+                          ),
                         if (!widget.isLoading)
                           RaisedButton(
                             elevation: 6.0,

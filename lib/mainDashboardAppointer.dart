@@ -214,45 +214,38 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
           height: 10,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Card(
+            RaisedButton(
+              disabledColor: Colors.grey,
               color: Colors.deepPurple,
-              child: FlatButton(
-                //color: Colors.blue,
-                onPressed: () {
-                  Firestore.instance
-                      .collection("users")
-                      .document(_id)
-                      .updateData({'canBook': false});
-                },
-                child: Card(
-                  color: Colors.deepPurple,
-                  child: Text(
-                    "Stop Appointments",
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
+              onPressed: () {
+                print("stop appointments");
+                Firestore.instance
+                    .collection("users")
+                    .document(_id)
+                    .updateData({'canBook': false});
+              },
+              child: Text(
+                "Stop Appointments",
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),
-            Card(
+            RaisedButton(
               color: Colors.deepPurple,
-              child: FlatButton(
-                //color: Colors.blue,
-                onPressed: () {
-                  Firestore.instance
-                      .collection("users")
-                      .document(_id)
-                      .updateData({'canBook': true});
-                },
-                child: Card(
-                  color: Colors.deepPurple,
-                  child: Text(
-                    "Start Appointments",
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
+              onPressed: () {
+                print("start appointments");
+
+                Firestore.instance
+                    .collection("users")
+                    .document(_id)
+                    .updateData({'canBook': true});
+              },
+              child: Text(
+                "Start Appointments",
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
-            )
+            ),
           ],
         ),
         Padding(
@@ -310,7 +303,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                               leading: Text(" " + (index + 1).toString() + " ",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize:20.0,
+                                      fontSize: 20.0,
                                       backgroundColor: Colors.deepPurple)),
                               title: Text(docAppointments[index].email),
                               subtitle: Column(
