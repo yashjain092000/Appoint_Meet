@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'morningEveningTime.dart';
 import 'package:toast/toast.dart';
 
+bool stopIsEnabled = false;
 String currentDoctorsMail;
 int morningTime = 0;
 int eveningTime = 0;
@@ -226,6 +227,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     .collection("Appointers")
                     .document(_id)
                     .updateData({'canBook': false});
+
+                Toast.show("Appointment booking stopped!!", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                setState(() {
+                  stopIsEnabled = true;
+                });
               },
               child: Text(
                 "Stop Appointments",
@@ -241,6 +248,11 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     .collection("Appointers")
                     .document(_id)
                     .updateData({'canBook': true});
+                Toast.show("Appointment booking resumed!", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                setState(() {
+                  stopIsEnabled = false;
+                });
               },
               child: Text(
                 "Start Appointments",

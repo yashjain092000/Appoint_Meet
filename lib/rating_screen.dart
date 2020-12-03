@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
 String currentUserMail;
+AuthResult authResult;
+FirebaseUser user;
 
 class RatingScreen extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class RatingScreen extends StatefulWidget {
 class _RatingScreenState extends State<RatingScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   getCurrentUserMail() async {
-    final FirebaseUser user = await auth.currentUser();
+    user = await auth.currentUser();
     final uemail = user.email;
     setState(() {
       currentUserMail = uemail;
@@ -94,8 +96,6 @@ class _RatingScreenState extends State<RatingScreen> {
             child: Text("Submit",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             onPressed: () async {
-              AuthResult authResult;
-
               await Firestore.instance
                   .collection('feedback')
                   .document(authResult.user.uid)
@@ -112,78 +112,5 @@ class _RatingScreenState extends State<RatingScreen> {
         ])
       ],
     );
-
-    // Scaffold(
-    //   body: SingleChildScrollView(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Center(
-    //           child: Text("Rating"),
-    //         ),
-    //         Row(
-    //           children: [
-    //             Center(
-    //                 child: SmoothStarRating(
-    //               color: Colors.yellow,
-    //               borderColor: Colors.deepPurple,
-    //               rating: rating,
-    //               isReadOnly: false,
-    //               size: 80,
-    //               filledIconData: Icons.star,
-    //               halfFilledIconData: Icons.star_half,
-    //               defaultIconData: Icons.star_border,
-    //               starCount: 5,
-    //               allowHalfRating: true,
-    //               spacing: 2.0,
-    //               onRated: (value) {
-    //                 setState(() {
-    //                   rating = value;
-    //                 });
-    //                 print("rating value -> $value");
-
-    //                 // print("rating value dd -> ${value.truncate()}");
-    //               },
-    //             )),
-    //           ],
-    //         ),
-    //         Row(
-    //           children: [
-    //             TextField(onChanged: (text) {
-    //               feedback = text;
-    //               setState(() {
-    //                 feedback = text;
-    //               });
-    //             }),
-    //             SizedBox(height: 40),
-    //             RaisedButton(
-    //               color: Colors.deepPurple,
-    //               child: Text("Submit",
-    //                   style: TextStyle(
-    //                     color: Colors.white,
-    //                   )),
-    //               onPressed: () async {
-    //                 AuthResult authResult;
-
-    //                 await Firestore.instance
-    //                     .collection('feedback')
-    //                     .document(authResult.user.uid)
-    //                     .setData({
-    //                   'email': currentUserMail,
-    //                   'feedback': feedback,
-    //                   'rating': rating,
-    //                 });
-
-    //                 Toast.show("Thanks for your Feedback!!", context,
-    //                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-    //               },
-    //             )
-    //           ],
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
