@@ -31,82 +31,159 @@ class _RatingScreenState extends State<RatingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Rating',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
           children: [
-            Row(
-              children: [
-                Center(
-                  child: Text("Rating"),
-                ),
-                Center(
-                    child: SmoothStarRating(
-                  color: Colors.yellow,
-                  borderColor: Colors.deepPurple,
-                  rating: rating,
-                  isReadOnly: false,
-                  size: 80,
-                  filledIconData: Icons.star,
-                  halfFilledIconData: Icons.star_half,
-                  defaultIconData: Icons.star_border,
-                  starCount: 5,
-                  allowHalfRating: true,
-                  spacing: 2.0,
-                  onRated: (value) {
-                    setState(() {
-                      rating = value;
-                    });
-                    print("rating value -> $value");
-
-                    // print("rating value dd -> ${value.truncate()}");
-                  },
-                )),
-              ],
+            Center(
+              child: Text(
+                "Please Rate Us!!",
+                style: TextStyle(fontSize: 32),
+              ),
             ),
-            Row(
-              children: [
-                TextField(onChanged: (text) {
+            Center(
+              child: SmoothStarRating(
+                color: Colors.yellow,
+                borderColor: Colors.deepPurple,
+                rating: rating,
+                isReadOnly: false,
+                size: 50,
+                filledIconData: Icons.star,
+                halfFilledIconData: Icons.star_half,
+                defaultIconData: Icons.star_border,
+                starCount: 5,
+                allowHalfRating: true,
+                spacing: 2.0,
+                onRated: (value) {
+                  setState(() {
+                    rating = value;
+                  });
+                  print("rating value -> $value");
+
+                  // print("rating value dd -> ${value.truncate()}");
+                },
+              ),
+            ),
+          ],
+        ),
+        Column(children: [
+          Padding(
+            padding: EdgeInsets.only(left: 18.0, right: 18),
+            child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.deepPurple,
+                  focusColor: Colors.deepPurple,
+                  hintText: "Your Feedback here...",
+                  hintStyle: TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                cursorColor: Colors.deepPurple,
+                onChanged: (text) {
                   feedback = text;
                   setState(() {
                     feedback = text;
                   });
                 }),
-                SizedBox(height: 40),
-                RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Submit",
-                      style: TextStyle(
-                        color: Colors.white,
-                      )),
-                  onPressed: () async {
-                    AuthResult authResult;
+          ),
+          SizedBox(height: 40),
+          RaisedButton(
+            elevation: 4,
+            color: Colors.deepPurple,
+            child: Text("Submit",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+            onPressed: () async {
+              AuthResult authResult;
 
-                    await Firestore.instance
-                        .collection('feedback')
-                        .document(authResult.user.uid)
-                        .setData({
-                      'email': currentUserMail,
-                      'feedback': feedback,
-                      'rating': rating,
-                    });
+              await Firestore.instance
+                  .collection('feedback')
+                  .document(authResult.user.uid)
+                  .setData({
+                'email': currentUserMail,
+                'feedback': feedback,
+                'rating': rating,
+              });
 
-                    Toast.show("Thanks for your Feedback!!", context,
-                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                  },
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+              Toast.show("Thanks for your Feedback!!", context,
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            },
+          )
+        ])
+      ],
     );
+
+    // Scaffold(
+    //   body: SingleChildScrollView(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         Center(
+    //           child: Text("Rating"),
+    //         ),
+    //         Row(
+    //           children: [
+    //             Center(
+    //                 child: SmoothStarRating(
+    //               color: Colors.yellow,
+    //               borderColor: Colors.deepPurple,
+    //               rating: rating,
+    //               isReadOnly: false,
+    //               size: 80,
+    //               filledIconData: Icons.star,
+    //               halfFilledIconData: Icons.star_half,
+    //               defaultIconData: Icons.star_border,
+    //               starCount: 5,
+    //               allowHalfRating: true,
+    //               spacing: 2.0,
+    //               onRated: (value) {
+    //                 setState(() {
+    //                   rating = value;
+    //                 });
+    //                 print("rating value -> $value");
+
+    //                 // print("rating value dd -> ${value.truncate()}");
+    //               },
+    //             )),
+    //           ],
+    //         ),
+    //         Row(
+    //           children: [
+    //             TextField(onChanged: (text) {
+    //               feedback = text;
+    //               setState(() {
+    //                 feedback = text;
+    //               });
+    //             }),
+    //             SizedBox(height: 40),
+    //             RaisedButton(
+    //               color: Colors.deepPurple,
+    //               child: Text("Submit",
+    //                   style: TextStyle(
+    //                     color: Colors.white,
+    //                   )),
+    //               onPressed: () async {
+    //                 AuthResult authResult;
+
+    //                 await Firestore.instance
+    //                     .collection('feedback')
+    //                     .document(authResult.user.uid)
+    //                     .setData({
+    //                   'email': currentUserMail,
+    //                   'feedback': feedback,
+    //                   'rating': rating,
+    //                 });
+
+    //                 Toast.show("Thanks for your Feedback!!", context,
+    //                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    //               },
+    //             )
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
