@@ -238,7 +238,7 @@ class _SearchBarState extends State<SearchBar> {
                                       );
                                     });
                               },
-                              child: Text("Prescription")),
+                              child: Text("View Prescription")),
                     ],
                   );
                 }
@@ -429,7 +429,16 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                         }
                       : () {
                           Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text("Not available")));
+                            SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text(
+                                "Not available",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
                         });
             });
   }

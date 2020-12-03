@@ -38,7 +38,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     super.initState();
     getCurrentUserMail();
-    newCount = 0;
+    setState(() {
+      newCount = 0;
+    });
   }
 
   @override
