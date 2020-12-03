@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 String currentUserMail;
 
@@ -96,6 +97,9 @@ class _RatingScreenState extends State<RatingScreen> {
                       'feedback': feedback,
                       'rating': rating,
                     });
+
+                    Toast.show("Thanks for your Feedback!!", context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
                 )
               ],
