@@ -57,10 +57,23 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 );
               }
               final documen = streamSnapshot.data.documents;
-
+              //List<String> cd = [];
               for (int i = 0; i < documen.length; i++) {
-                if (documen[i]['mail'] == _currentMail) {
+                if (documen[i]['mail'] == _currentMail &&
+                    (DateTime.now().day + DateTime.now().month) ==
+                        (DateTime.parse(documen[i]['date']).day +
+                            DateTime.parse(documen[i]['date']).month)) {
                   noti.add(documen[i]['message']);
+                }
+              }
+              int m = noti.length;
+              for (int j = 0; j < noti.length; j++) {
+                String n = noti[j];
+                for (int i = j + 1; i < m; i++) {
+                  if (n == noti[i]) {
+                    noti.removeAt(j);
+                    m--;
+                  }
                 }
               }
               if (noti.length == 0)

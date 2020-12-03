@@ -40,7 +40,7 @@ class _SearchBarState extends State<SearchBar> {
     return Scaffold(
       body: Column(mainAxisSize: MainAxisSize.min, children: [
         StreamBuilder(
-            stream: Firestore.instance.collection('users').snapshots(),
+            stream: Firestore.instance.collection('Appointers').snapshots(),
             builder: (ctx, streamSnapshot) {
               if (streamSnapshot.connectionState == ConnectionState.waiting) {
                 return Center(
@@ -50,16 +50,21 @@ class _SearchBarState extends State<SearchBar> {
               final document = streamSnapshot.data.documents;
 
               for (int i = 0; i < document.length; i++) {
-                if (document[i]['typeUser'].compareTo("Appointer") == 0) {
-                  detailList.add(new Details(
-                      document[i]['typeUser'],
-                      document[i]['username'],
-                      document[i]['email'],
-                      document[i]['profile_image'],
-                      document[i]['canBook']));
-                }
+                detailList.add(new Details(
+                    document[i]['specialisation'],
+                    document[i]['username'],
+                    document[i]['userEmail'],
+                    document[i]['profile_image'],
+                    document[i]['address'],
+                    document[i]['morning_start_time'] +
+                        " " +
+                        document[i]['morning_end_time'],
+                    document[i]['evening_start_time'] +
+                        " " +
+                        document[i]['evening_end_time'],
+                    document[i]['canBook']));
               }
-              deleteDublicate();
+              deleteDublicate(detailList);
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               );
@@ -195,15 +200,45 @@ class _SearchBarState extends State<SearchBar> {
 
                 deleteDublicateAppointment(todaysAppointments);
                 sortList(todaysAppointments);
-                Widget appointmentNo(Appointments a) {
+                Widget appointmentNoTime(Appointments a) {
                   int n;
+                  String g = '';
+                  String prescription = " ";
                   for (int i = 0; i < docu.length; i++) {
                     if (a.bookingDate ==
                         DateTime.parse(docu[i]['BookingTime'])) {
                       n = docu[i]['Appointment_no'];
+                      g = docu[i]['Appointment_time'];
+                      prescription = docu[i]['Appointment_prescription'];
                     }
                   }
-                  return Text(n.toString());
+                  return Column(
+                    children: [
+                      Text("Appointment no.:" + n.toString() + " Time:" + g),
+                      prescription.compareTo("not uploaded yet") == 0
+                          ? Text(prescription)
+                          : FlatButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (_) {
+                                      return Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.6,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        child: CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(prescription),
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: Text("Prescription")),
+                    ],
+                  );
                 }
 
                 //print(todaysAppointments);
@@ -222,10 +257,9 @@ class _SearchBarState extends State<SearchBar> {
                           subtitle: Column(
                             children: [
                               Text(todaysAppointments[index].currentUserMail),
-                              appointmentNo(todaysAppointments[index]),
+                              appointmentNoTime(todaysAppointments[index]),
                             ],
                           ),
-                          trailing: appointmentNo(todaysAppointments[index]),
                         ),
                       );
                     });
