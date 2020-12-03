@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:flutter/material.dart';
+
+String currentUserMail;
 
 class RatingScreen extends StatefulWidget {
   @override
@@ -7,8 +11,22 @@ class RatingScreen extends StatefulWidget {
 }
 
 class _RatingScreenState extends State<RatingScreen> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  getCurrentUserMail() async {
+    final FirebaseUser user = await auth.currentUser();
+    final uemail = user.email;
+    setState(() {
+      currentUserMail = uemail;
+    });
+  }
+
   var rating = 3.0;
   String feedback = "";
+
+  void initState() {
+    super.initState();
+    getCurrentUserMail();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +82,18 @@ class _RatingScreenState extends State<RatingScreen> {
                   style: TextStyle(
                     color: Colors.white,
                   )),
-              onPressed: () {},
+              onPressed: () async {
+                AuthResult authResult;
+
+                await Firestore.instance
+                    .collection('feedback')
+                    .document(authResult.user.uid)
+                    .setData({
+                  'email': currentUserMail,
+                  'feedback': feedback,
+                  'rating': rating,
+                });
+              },
             )
           ],
         ),

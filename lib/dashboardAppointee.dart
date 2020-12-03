@@ -6,6 +6,7 @@ import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'SearchAppointer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:badges/badges.dart';
+import 'rating_screen.dart';
 
 int notifi = 0;
 
@@ -39,20 +40,28 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Settings",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.white,
-        ),
-        UpdateProfileScreenAppointee()));
-    items.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
           name: "Notifications",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
         ),
         NotificationScreen()));
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Feedback/Rating",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.white,
+        ),
+        RatingScreen()));
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Settings",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.white,
+        ),
+        UpdateProfileScreenAppointee()));
     super.initState();
   }
 

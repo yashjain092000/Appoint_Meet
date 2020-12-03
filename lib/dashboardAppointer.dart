@@ -3,7 +3,7 @@ import 'package:Appoint_Meet/previousAppointments.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'UpdateProfileScreen.dart';
-//import 'CarouselPage.dart';
+import 'rating_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DashboardAppointer extends StatefulWidget {
@@ -42,6 +42,14 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
           colorLineSelected: Colors.orange,
         ),
         UpdateProfileScreen()));
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Feedback/Rating",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.white,
+        ),
+        RatingScreen()));
 
     super.initState();
   }
