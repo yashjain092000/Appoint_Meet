@@ -70,31 +70,36 @@ class _RatingScreenState extends State<RatingScreen> {
                 )),
               ],
             ),
-            TextField(onChanged: (text) {
-              feedback = text;
-              setState(() {
-                feedback = text;
-              });
-            }),
-            RaisedButton(
-              color: Colors.deepPurple,
-              child: Text("Submit",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              onPressed: () async {
-                AuthResult authResult;
+            Row(
+              children: [
+                TextField(onChanged: (text) {
+                  feedback = text;
+                  setState(() {
+                    feedback = text;
+                  });
+                }),
+                SizedBox(height: 40),
+                RaisedButton(
+                  color: Colors.deepPurple,
+                  child: Text("Submit",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  onPressed: () async {
+                    AuthResult authResult;
 
-                await Firestore.instance
-                    .collection('feedback')
-                    .document(authResult.user.uid)
-                    .setData({
-                  'email': currentUserMail,
-                  'feedback': feedback,
-                  'rating': rating,
-                });
-              },
-            )
+                    await Firestore.instance
+                        .collection('feedback')
+                        .document(authResult.user.uid)
+                        .setData({
+                      'email': currentUserMail,
+                      'feedback': feedback,
+                      'rating': rating,
+                    });
+                  },
+                )
+              ],
+            ),
           ],
         ),
       ),
