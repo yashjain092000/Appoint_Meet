@@ -41,6 +41,7 @@ dependencies:
   firebase_storage: ^3.0.8
   badges: ^1.1.4
   toast: ^0.1.5
+  smooth_star_rating: 1.1.1
 
 dev_dependencies:
   flutter_test:
