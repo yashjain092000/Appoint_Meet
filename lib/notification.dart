@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 List<String> noti = [];
-int oldCount = 0;
 int newCount = 0;
 
 class Count {
@@ -13,6 +12,10 @@ class Count {
 
   void zeroCount() {
     newCount = 0;
+  }
+
+  void fillNoti() {
+    newCount = noti.length;
   }
 }
 
@@ -35,8 +38,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     super.initState();
     getCurrentUserMail();
-    oldCount = newCount;
-    newCount = noti.length;
+    newCount = 0;
   }
 
   @override

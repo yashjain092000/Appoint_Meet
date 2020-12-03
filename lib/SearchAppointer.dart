@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'CarouselPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'datePick.dart';
+import 'notification.dart';
 
 String currentUserMail;
 DateTime selectedDate;
@@ -31,6 +32,7 @@ class _SearchBarState extends State<SearchBar> {
   void initState() {
     super.initState();
     getCurrentUserMail();
+    Count().fillNoti();
   }
 
   int len = 0;
