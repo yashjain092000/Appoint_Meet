@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Home",
+          name: "🏛️ Home",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Login",
+          name: "👤 Login",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         LoginScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Signup",
+          name: "👥 Signup",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,

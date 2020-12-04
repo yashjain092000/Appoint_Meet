@@ -150,6 +150,24 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ],
             ),
           ),
+          SizedBox(height: 220),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 12, right: 12),
+                child: Divider(thickness: 0.4, color: Colors.deepPurple),
+              ),
+              Center(child: Text("Developed with")),
+              Center(child: Text("❤")),
+              Center(child: Text("by")),
+              Center(child: Text("Yash & Mukul")),
+              Padding(
+                padding: EdgeInsets.only(left: 12, right: 12),
+                child: Divider(thickness: 0.4, color: Colors.deepPurple),
+              ),
+            ],
+          ),
         ],
       ),
     );

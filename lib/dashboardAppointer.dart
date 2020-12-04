@@ -18,7 +18,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
   void initState() {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "DashBoard",
+          name: "🏛️ DashBoard",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
@@ -27,7 +27,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Past Appointments",
+          name: "⌛ Past Appointments",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
@@ -36,7 +36,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Update Profile",
+          name: "⚙️ Update Profile",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.orange,
@@ -44,7 +44,7 @@ class _DashboardAppointerState extends State<DashboardAppointer> {
         UpdateProfileScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Feedback/Rating",
+          name: "✨ Feedback/Rating",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,

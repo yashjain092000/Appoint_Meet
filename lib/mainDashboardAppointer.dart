@@ -8,7 +8,7 @@ import 'morningEveningTime.dart';
 import 'package:toast/toast.dart';
 
 bool stopIsEnabled = false;
-String holidayText = "Off";
+String holidayText = "Off 🤓";
 String currentDoctorsMail;
 int morningTime = 0;
 int eveningTime = 0;
@@ -46,7 +46,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
           setState(() {
             _id = snapshot.documents[i].documentID;
             _bookStatus = snapshot.documents[i]['canBook'];
-            holidayText = _bookStatus ? "Off" : "On";
+            holidayText = _bookStatus ? "Off 🤓" : "On 😎";
           });
         }
       }
@@ -261,7 +261,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                       setState(() {
                         stopIsEnabled = true;
                         _bookStatus = false;
-                        holidayText = "On";
+                        holidayText = "On 😎";
                       });
                     }
                   : null,
@@ -285,7 +285,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                       setState(() {
                         stopIsEnabled = false;
                         _bookStatus = true;
-                        holidayText = "Off";
+                        holidayText = "Off 🤓";
                       });
                     }
                   : null,

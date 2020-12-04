@@ -23,7 +23,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
     notifi = Count().getCount();
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Dashboard",
+          name: "🏛️ Dashboard",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -31,7 +31,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
         SearchBar()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "My Appointments",
+          name: "⏲️ My Appointments",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -40,7 +40,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Notifications",
+          name: "🔔 Notifications",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -48,7 +48,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
         NotificationScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Feedback/Rating",
+          name: "✨ Feedback/Rating",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
@@ -56,7 +56,7 @@ class _DashboardAppointeeState extends State<DashboardAppointee> {
         RatingScreen()));
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Settings",
+          name: "⚙️ Profile Settings",
           baseStyle:
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.white,
