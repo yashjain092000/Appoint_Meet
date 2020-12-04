@@ -234,6 +234,7 @@ class _SearchBarState extends State<SearchBar> {
                                             MediaQuery.of(context).size.width *
                                                 0.9,
                                         child: CircleAvatar(
+                                          backgroundColor: Colors.deepPurple,
                                           backgroundImage:
                                               NetworkImage(prescription),
                                         ),

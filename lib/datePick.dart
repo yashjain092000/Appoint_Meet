@@ -30,8 +30,8 @@ class DatePick extends StatefulWidget {
       int j) {
     address = addr;
     specialisation = special;
-    eveTime = evening;
-    morTime = morning;
+    eveTime = evening.substring(11, 16) + " to " + evening.substring(31, 36);
+    morTime = morning.substring(11, 16) + " to " + morning.substring(31, 36);
     userName = uName;
     appointerMail = appointMail;
     appointeeMail = appointeMail;
@@ -94,8 +94,10 @@ class _DatePickState extends State<DatePick> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       radius: 80,
@@ -105,6 +107,47 @@ class _DatePickState extends State<DatePick> {
                           : NetworkImage(imageUrl),
                     ),
                   ],
+                ),
+                Text(userName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 32,
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Morning Timings:",
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("$morTime"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Evening Timings:",
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("$eveTime"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Address:",
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("$address"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Email:",
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("$appointerMail"),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10),
+                  child: Divider(thickness: 0.3, color: Colors.deepPurple),
                 ),
               ],
             ),
