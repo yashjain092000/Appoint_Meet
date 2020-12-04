@@ -8,7 +8,7 @@ import 'morningEveningTime.dart';
 import 'package:toast/toast.dart';
 
 bool stopIsEnabled = false;
-String holidayText = "Holiday Mode is Off";
+String holidayText = "Off";
 String currentDoctorsMail;
 int morningTime = 0;
 int eveningTime = 0;
@@ -46,6 +46,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
           setState(() {
             _id = snapshot.documents[i].documentID;
             _bookStatus = snapshot.documents[i]['canBook'];
+            holidayText = _bookStatus ? "Off" : "On";
           });
         }
       }
@@ -142,7 +143,29 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         SizedBox(
           height: 10,
         ),
-        Center(child: Text("$holidayText")),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                "Holiday Mode is ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              ),
+            ),
+            Center(
+                child: Text(
+              "$holidayText",
+              style: TextStyle(
+                  color: _bookStatus ? Colors.green : Colors.red,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900),
+            )),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10.0, right: 10),
+          child: Divider(thickness: 0.3, color: Colors.deepPurple),
+        ),
         CarouselPage(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -225,7 +248,6 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
           children: [
             RaisedButton(
               disabledColor: Colors.grey,
-              color: Colors.deepPurple,
               onPressed: _bookStatus
                   ? () {
                       print("stop appointments");
@@ -239,16 +261,17 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                       setState(() {
                         stopIsEnabled = true;
                         _bookStatus = false;
+                        holidayText = "On";
                       });
                     }
                   : null,
+              color: Colors.deepPurple,
               child: Text(
                 "Stop Appointments",
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),
             RaisedButton(
-              color: Colors.deepPurple,
               onPressed: !_bookStatus
                   ? () {
                       print("start appointments");
@@ -262,9 +285,11 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                       setState(() {
                         stopIsEnabled = false;
                         _bookStatus = true;
+                        holidayText = "Off";
                       });
                     }
                   : null,
+              color: Colors.deepPurple,
               child: Text(
                 "Start Appointments",
                 style: TextStyle(color: Colors.white, fontSize: 15),
