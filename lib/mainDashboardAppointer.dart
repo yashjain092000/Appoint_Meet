@@ -8,6 +8,7 @@ import 'morningEveningTime.dart';
 import 'package:toast/toast.dart';
 
 bool stopIsEnabled = false;
+String holidayText = "Holiday Mode is Off";
 String currentDoctorsMail;
 int morningTime = 0;
 int eveningTime = 0;
@@ -23,7 +24,7 @@ class MainDashboardAppointer extends StatefulWidget {
 class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   String _id = "";
-  bool _bookStatus;
+  bool _bookStatus = true;
   getCurrentDoctorsMail() async {
     final FirebaseUser user = await auth.currentUser();
     final uemail = user.email;
@@ -127,6 +128,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
     getCurrentDoctorsMail();
     timeTable();
     userDocumentIdAppointer();
+    print(_bookStatus);
     //getTime();
   }
 
@@ -140,8 +142,8 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
         SizedBox(
           height: 10,
         ),
+        Center(child: Text("$holidayText")),
         CarouselPage(),
-        //getTime(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -224,19 +226,22 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
             RaisedButton(
               disabledColor: Colors.grey,
               color: Colors.deepPurple,
-              onPressed: () {
-                print("stop appointments");
-                Firestore.instance
-                    .collection("Appointers")
-                    .document(_id)
-                    .updateData({'canBook': false});
+              onPressed: _bookStatus
+                  ? () {
+                      print("stop appointments");
+                      Firestore.instance
+                          .collection("Appointers")
+                          .document(_id)
+                          .updateData({'canBook': false});
 
-                Toast.show("Appointment booking stopped!!", context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                setState(() {
-                  stopIsEnabled = true;
-                });
-              },
+                      Toast.show("Appointment booking stopped!!", context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                      setState(() {
+                        stopIsEnabled = true;
+                        _bookStatus = false;
+                      });
+                    }
+                  : null,
               child: Text(
                 "Stop Appointments",
                 style: TextStyle(color: Colors.white, fontSize: 15),
@@ -244,19 +249,22 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
             ),
             RaisedButton(
               color: Colors.deepPurple,
-              onPressed: () {
-                print("start appointments");
+              onPressed: !_bookStatus
+                  ? () {
+                      print("start appointments");
 
-                Firestore.instance
-                    .collection("Appointers")
-                    .document(_id)
-                    .updateData({'canBook': true});
-                Toast.show("Appointment booking resumed!", context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                setState(() {
-                  stopIsEnabled = false;
-                });
-              },
+                      Firestore.instance
+                          .collection("Appointers")
+                          .document(_id)
+                          .updateData({'canBook': true});
+                      Toast.show("Appointment booking resumed!", context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                      setState(() {
+                        stopIsEnabled = false;
+                        _bookStatus = true;
+                      });
+                    }
+                  : null,
               child: Text(
                 "Start Appointments",
                 style: TextStyle(color: Colors.white, fontSize: 15),
