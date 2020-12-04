@@ -321,7 +321,8 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                           currentDoctorsMail,
                           DateTime.parse(docu[i]['appointmentDate']),
                           DateTime.parse(docu[i]['BookingTime']),
-                          docu[i]['id'].toString()));
+                          docu[i]['id'].toString(),
+                          docu[i]['doctor_image']));
                     }
                   }
                 }

@@ -190,12 +190,14 @@ class _SearchBarState extends State<SearchBar> {
                     if (DateTime.parse(docu[i]['appointmentDate']).day >=
                         DateTime.now().day) {
                       todaysAppointments.add(new Appointments(
-                          docu[i]['username'],
-                          docu[i]['email'],
-                          currentUserMail,
-                          DateTime.parse(docu[i]['appointmentDate']),
-                          DateTime.parse(docu[i]['BookingTime']),
-                          docu[i]['id'].toString()));
+                        docu[i]['username'],
+                        docu[i]['email'],
+                        currentUserMail,
+                        DateTime.parse(docu[i]['appointmentDate']),
+                        DateTime.parse(docu[i]['BookingTime']),
+                        docu[i]['id'].toString(),
+                        docu[i]['doctor_image'],
+                      ));
                     }
                   }
                 }
@@ -254,7 +256,8 @@ class _SearchBarState extends State<SearchBar> {
                           leading: CircleAvatar(
                             radius: 60,
                             backgroundColor: Colors.deepPurple,
-                            backgroundImage: null,
+                            backgroundImage: NetworkImage(
+                                todaysAppointments[index].imageUrl),
                           ),
                           subtitle: Column(
                             children: [
@@ -408,13 +411,17 @@ class AppointerNameSearch extends SearchDelegate<Details> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DatePick(
-                                                          listitem.userName,
-                                                          listitem.email,
-                                                          currentUserMail,
-                                                          listitem.imageUrl,
-                                                          d)));
+                                                  builder: (context) => DatePick(
+                                                      listitem.address,
+                                                      listitem
+                                                          .userSpecialisation,
+                                                      listitem.eveningTime,
+                                                      listitem.morningTime,
+                                                      listitem.userName,
+                                                      listitem.email,
+                                                      currentUserMail,
+                                                      listitem.imageUrl,
+                                                      d)));
                                           d = d + 1;
                                         },
                                         child: Text(

@@ -21,6 +21,7 @@ class _RatingScreenState extends State<RatingScreen> {
     setState(() {
       currentUserMail = uemail;
     });
+    print(currentUserMail.toString());
   }
 
   var rating = 3.0;
@@ -95,11 +96,8 @@ class _RatingScreenState extends State<RatingScreen> {
             color: Colors.deepPurple,
             child: Text("Submit",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onPressed: () async {
-              await Firestore.instance
-                  .collection('feedback')
-                  .document(authResult.user.uid)
-                  .setData({
+            onPressed: () {
+              Firestore.instance.collection('feedback').document().setData({
                 'email': currentUserMail,
                 'feedback': feedback,
                 'rating': rating,
