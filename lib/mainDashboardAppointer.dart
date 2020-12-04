@@ -23,6 +23,7 @@ class MainDashboardAppointer extends StatefulWidget {
 class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   String _id = "";
+  bool _bookStatus;
   getCurrentDoctorsMail() async {
     final FirebaseUser user = await auth.currentUser();
     final uemail = user.email;
@@ -43,10 +44,12 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
           snapshot.documents[i].documentID;
           setState(() {
             _id = snapshot.documents[i].documentID;
+            _bookStatus = snapshot.documents[i]['canBook'];
           });
         }
       }
     });
+    print(_bookStatus.toString());
   }
 
   List<TimeTable> doctorsTimeTable = [];
@@ -307,6 +310,35 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                     }
                   }
                 }
+                Widget prescription(Appointments a) {
+                  String prescrip = " ";
+                  for (int i = 0; i < docu.length; i++) {
+                    if (a.bookingDate ==
+                        DateTime.parse(docu[i]['BookingTime'])) {
+                      prescrip = docu[i]['Appointment_prescription'];
+                    }
+                  }
+                  return prescrip.compareTo("not uploaded yet") == 0
+                      ? PrescriptionPicker(a.bookingDate.toString(), a.id)
+                      : FlatButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (_) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.6,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(prescrip),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Text("Prescription"));
+                }
+
                 return ListView.builder(
                     //shrinkWrap: true,
                     itemCount: docAppointments.length,
@@ -324,11 +356,7 @@ class _MainDashboardAppointerState extends State<MainDashboardAppointer> {
                                 children: [
                                   Text(docAppointments[index].currentUserMail),
                                   Text(time(index + 1, index)),
-                                  PrescriptionPicker(
-                                      docAppointments[index]
-                                          .bookingDate
-                                          .toString(),
-                                      docAppointments[index].id)
+                                  prescription(docAppointments[index]),
                                 ],
                               ),
                               trailing: IconButton(
