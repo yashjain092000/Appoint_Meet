@@ -8,9 +8,10 @@ class Appointments {
   DateTime bookedDate;
   DateTime bookingDate;
   String id;
+  String imageUrl;
   //String userId;
   Appointments(this.userName, this.email, this.currentUserMail, this.bookedDate,
-      this.bookingDate, this.id);
+      this.bookingDate, this.id, this.imageUrl);
 
   String get userEmail => email;
   // String getUserType {

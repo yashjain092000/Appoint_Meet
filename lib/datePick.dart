@@ -11,11 +11,27 @@ String userName = '';
 String imageUrl = '';
 DateTime bookingTime;
 int i;
+String address = '';
+String morTime = '';
+String eveTime = '';
+String specialisation = '';
 
 // ignore: must_be_immutable
 class DatePick extends StatefulWidget {
-  DatePick(String uName, String appointMail, String appointeMail, String imgUrl,
+  DatePick(
+      String addr,
+      String special,
+      String evening,
+      String morning,
+      String uName,
+      String appointMail,
+      String appointeMail,
+      String imgUrl,
       int j) {
+    address = addr;
+    specialisation = special;
+    eveTime = evening;
+    morTime = morning;
     userName = uName;
     appointerMail = appointMail;
     appointeeMail = appointeMail;
@@ -58,7 +74,8 @@ class _DatePickState extends State<DatePick> {
       'Appointment_time': "not set yet",
       'Appointment_no': 0,
       'Appointment_prescription': "not uploaded yet",
-      'id': c
+      'id': c,
+      'doctor_image': imageUrl
     });
   }
 

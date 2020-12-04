@@ -51,7 +51,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                         currentMail,
                         DateTime.parse(documen[i]['appointmentDate']),
                         DateTime.parse(documen[i]['BookingTime']),
-                        documen[i]['id'].toString()));
+                        documen[i]['id'].toString(),
+                        documen[i]['doctor_image']));
                   }
                 }
               }
