@@ -46,26 +46,17 @@ The appointer dashboard contains a side hidden drawer at the top right corner an
 This screen contains info of all the appointments of the user.
 
 ## Screenshots
-<img src="/shots/1.jpg" height="400" width="200">
-<img src="/shots/2.jpg" height="400" width="200">
-<img src="/shots/3.jpg" height="400" width="200">
-<img src="/shots/4.jpg" height="400" width="200">
-<img src="/shots/5.jpg" height="400" width="200">
-<img src="/shots/6.jpg" height="400" width="200">
-<img src="/shots/7.jpg" height="400" width="200">
-<img src="/shots/8.jpg" height="400" width="200">
-<img src="/shots/9.jpg" height="400" width="200">
-<img src="/shots/10.jpg" height="400" width="200">
-<img src="/shots/11.jpg" height="400" width="200">
-<img src="/shots/12.jpg" height="400" width="200">
-<img src="/shots/13.jpg" height="400" width="200">
-<img src="/shots/14.jpg" height="400" width="200">
-<img src="/shots/15.jpg" height="400" width="200">
-<img src="/shots/16.jpg" height="400" width="200">
-<img src="/shots/17.jpg" height="400" width="200">
-<img src="/shots/18.jpg" height="400" width="200">
-<img src="/shots/19.jpg" height="400" width="200">
-<img src="/shots/20.jpg" height="400" width="200">
+<img src="/shots/1.jpg" height="400" width="200">  <img src="/shots/2.jpg" height="400" width="200">  
+<img src="/shots/3.jpg" height="400" width="200">  <img src="/shots/4.jpg" height="400" width="200">
+<img src="/shots/5.jpg" height="400" width="200">  <img src="/shots/6.jpg" height="400" width="200">
+<img src="/shots/7.jpg" height="400" width="200">  <img src="/shots/8.jpg" height="400" width="200">
+<img src="/shots/9.jpg" height="400" width="200">  <img src="/shots/10.jpg" height="400" width="200">
+<img src="/shots/11.jpg" height="400" width="200">  <img src="/shots/12.jpg" height="400" width="200">
+<img src="/shots/13.jpg" height="400" width="200">  <img src="/shots/14.jpg" height="400" width="200">
+<img src="/shots/15.jpg" height="400" width="200">  <img src="/shots/16.jpg" height="400" width="200">
+<img src="/shots/17.jpg" height="400" width="200">  <img src="/shots/18.jpg" height="400" width="200">
+<img src="/shots/19.jpg" height="400" width="200">  <img src="/shots/20.jpg" height="400" width="200">
+
 
 
 
