@@ -47,7 +47,7 @@ This screen contains info of all the appointments of the user.
 
 ## Screenshots
 ![](/shots/1.jpg)
-<img src="/shots/1.jpg" height="50" width="20">
+<img src="/shots/1.jpg" height="500" width="200">
 
 
 
