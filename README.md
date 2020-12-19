@@ -45,5 +45,8 @@ The appointer dashboard contains a side hidden drawer at the top right corner an
 * **Past Appointments Screen**
 This screen contains info of all the appointments of the user.
 
+## Screenshots
+![](/shots/1.jpg)
+
 
 
