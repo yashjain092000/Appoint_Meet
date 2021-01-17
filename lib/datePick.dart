@@ -43,21 +43,34 @@ class DatePick extends StatefulWidget {
 }
 
 class _DatePickState extends State<DatePick> {
+  // selectDate(BuildContext context) async {
+  //   final DateTime picked = await showDatePicker(
+  //       context: context,
+  //       initialDate: selectedDate,
+  //       firstDate: DateTime(2020),
+  //       lastDate: DateTime(2021),
+  //       helpText: 'Select Appointment Date',
+  //       cancelText: 'Not now',
+  //       confirmText: 'Confirm');
+  //   if (picked != null && picked != selectedDate) {
+  //     setState(() {
+  //       selectedDate = picked;
+  //     });
+  //   }
+  //   print(picked);
+  // }
+
   selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2020),
-        lastDate: DateTime(2021),
-        helpText: 'Select Appointment Date',
-        cancelText: 'Not now',
-        confirmText: 'Confirm');
-    if (picked != null && picked != selectedDate) {
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
       });
-    }
-    print(picked);
   }
 
   void addAppointment(String username, String mail,
